@@ -1,0 +1,8 @@
+torch
+transformers
+sentence-transformers
+faiss-cpu
+streamlit
+langchain
+openai  # optional, in case you want OpenAI APIs
+ollama   # if you want easy local model deployment (optional)

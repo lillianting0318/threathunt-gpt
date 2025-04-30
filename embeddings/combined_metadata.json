@@ -1,0 +1,82 @@
+[
+  {
+    "source_type": "unknown",
+    "id": "",
+    "text": ""
+  },
+  {
+    "source_type": "cti_summary",
+    "title": "APT28",
+    "text": "APT28 is a Russian cyber espionage group linked to the GRU's 85th Main Special Service Center. Active since at least 2004, APT28 has targeted political organizations, anti-doping agencies, nuclear facilities, and international organizations. Their operations have included hacking campaigns during the 2016 U.S. election and cyberattacks on critical infrastructure."
+  },
+  {
+    "source_type": "cti_techniques",
+    "title": "APT28",
+    "text": ""
+  },
+  {
+    "source_type": "cti_summary",
+    "title": "APT29",
+    "text": "APT29 is a Russian cyber espionage group associated with the Russian Foreign Intelligence Service (SVR). It has targeted government, think tanks, and energy sectors globally using spearphishing and sophisticated malware campaigns."
+  },
+  {
+    "source_type": "cti_techniques",
+    "title": "APT29",
+    "text": ""
+  },
+  {
+    "source_type": "cti_summary",
+    "title": "Lazarus Group",
+    "text": "Lazarus Group is a North Korean cyber threat group responsible for a wide range of cyber operations, including attacks on financial institutions, cryptocurrency exchanges, and global critical infrastructure."
+  },
+  {
+    "source_type": "cti_techniques",
+    "title": "Lazarus Group",
+    "text": ""
+  },
+  {
+    "source_type": "cti_summary",
+    "title": "Cobalt Group",
+    "text": "Cobalt Group is a cybercrime group specializing in attacks on financial institutions, leveraging spearphishing and malware campaigns to conduct network intrusions and financial theft."
+  },
+  {
+    "source_type": "cti_techniques",
+    "title": "Cobalt Group",
+    "text": ""
+  },
+  {
+    "source_type": "cti_summary",
+    "title": "FIN7",
+    "text": "FIN7 is a financially motivated cybercrime group that primarily targets the retail, restaurant, and hospitality sectors to steal payment card information through point-of-sale malware attacks."
+  },
+  {
+    "source_type": "cti_techniques",
+    "title": "FIN7",
+    "text": ""
+  },
+  {
+    "source_type": "log",
+    "event_id": 21,
+    "text": "mstsc.exe | user: administrator | time: 2025-04-28T17:00:00Z"
+  },
+  {
+    "source_type": "log",
+    "event_id": 22,
+    "text": "svchost.exe | user: victim_user | time: 2025-04-28T16:40:00Z"
+  },
+  {
+    "source_type": "log",
+    "event_id": 1,
+    "text": "net.exe | user: SYSTEM | time: 2025-04-28T16:10:00Z"
+  },
+  {
+    "source_type": "log",
+    "event_id": 3,
+    "text": "svchost.exe | user: victim_user | time: 2025-04-28T15:00:00Z"
+  },
+  {
+    "source_type": "log",
+    "event_id": 1,
+    "text": "powershell.exe | user: victim_user | time: 2025-04-28T14:25:00Z"
+  }
+]

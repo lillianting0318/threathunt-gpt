@@ -1,0 +1,7 @@
+{
+    "event_id": 22,
+    "process_name": "svchost.exe",
+    "dns_query": "malicious-domain.example",
+    "user": "victim_user",
+    "timestamp": "2025-04-28T16:40:00Z"
+  }

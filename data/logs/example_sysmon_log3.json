@@ -1,0 +1,7 @@
+{
+    "event_id": 1,
+    "process_name": "net.exe",
+    "command_line": "net user attacker_user P@ssword123 /add",
+    "user": "SYSTEM",
+    "timestamp": "2025-04-28T16:10:00Z"
+  }  

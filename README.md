@@ -1,6 +1,6 @@
 # threathunt-gpt
 An LLM-powered threat hunting assistant with RAG and MITRE ATT&amp;CK integration.
-# ================= README.md =================
+# ========= README.md =========
 # ThreatHunt-GPT
 
 ThreatHunt-GPT is an interactive, LLM-powered threat hunting assistant. It combines Retrieval-Augmented Generation (RAG) with a multi-agent architecture to assist cybersecurity analysts with tasks such as:

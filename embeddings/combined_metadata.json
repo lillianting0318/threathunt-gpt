@@ -1,28 +1,83 @@
 [
   {
-    "source_type": "unknown",
-    "id": "",
-    "text": ""
-  },
-  {
     "source_type": "cti_summary",
-    "title": "APT28",
-    "text": "APT28 is a Russian cyber espionage group linked to the GRU's 85th Main Special Service Center. Active since at least 2004, APT28 has targeted political organizations, anti-doping agencies, nuclear facilities, and international organizations. Their operations have included hacking campaigns during the 2016 U.S. election and cyberattacks on critical infrastructure."
+    "title": "APT19",
+    "text": "APT19 is a Chinese-based threat group targeting sectors including defense, finance, and law. Known for spearphishing and use of HTTP malware variants."
   },
   {
     "source_type": "cti_techniques",
-    "title": "APT28",
-    "text": ""
+    "title": "APT19",
+    "text": "T1071.001 T1547.001 T1059 T1059.001 T1543.003 T1132.001 T1140 T1189 T1564.003 T1574.001 T1112 T1027.010 T1027.013 T1588.002 T1566.001 T1218.010 T1218.011 T1082 T1016 T1033 T1204.002"
   },
   {
     "source_type": "cti_summary",
-    "title": "APT29",
-    "text": "APT29 is a Russian cyber espionage group associated with the Russian Foreign Intelligence Service (SVR). It has targeted government, think tanks, and energy sectors globally using spearphishing and sophisticated malware campaigns."
+    "title": "Ajax Security Team",
+    "text": "Ajax Security Team is a group that has been active since at least 2010 and believed to be operating out of Iran. By 2014 Ajax Security Team transitioned from website defacement operations to malware-based cyber espionage campaigns targeting the US defense industrial base and Iranian users of anti-censorship technologies."
   },
   {
     "source_type": "cti_techniques",
-    "title": "APT29",
-    "text": ""
+    "title": "Ajax Security Team",
+    "text": "T1555.003 T1105 T1056.001 T1566.001 T1566.003 T1204.002"
+  },
+  {
+    "source_type": "cti_summary",
+    "title": "Agrius",
+    "text": "Agrius is an Iranian threat actor active since 2020 notable for a series of ransomware and wiper operations in the Middle East, with an emphasis on Israeli targets. Public reporting has linked Agrius to Iran's Ministry of Intelligence and Security (MOIS)."
+  },
+  {
+    "source_type": "cti_techniques",
+    "title": "Agrius",
+    "text": "T1583 T1560.001 T1119 T1110 T1110.003 T1059.003 T1543.003 T1005 T1074.001 T1140 T1041 T1190 T1562.001 T1570 T1036 T1046 T1003.001 T1003.002 T1021.001 T1018 T1505.003 T1078.002"
+  },
+  {
+    "source_type": "cti_summary",
+    "title": "APT-C-23",
+    "text": "APT-C-23 is a threat group active since at least 2014, focused on Middle Eastern targets including Israeli military assets. It has developed mobile spyware for both Android and iOS devices since 2017, using techniques such as phishing and masquerading."
+  },
+  {
+    "source_type": "cti_techniques",
+    "title": "APT-C-23",
+    "text": "T1655.001 T1660 T1422"
+  },
+  {
+    "source_type": "cti_summary",
+    "title": "APT1",
+    "text": "APT1 is a Chinese threat group attributed to PLA Unit 61398. It has conducted extensive cyber espionage against US entities, including the defense industrial base, and used various techniques for long-term intrusion."
+  },
+  {
+    "source_type": "cti_techniques",
+    "title": "APT1",
+    "text": "T1087.001 T1583.001 T1560.001 T1119 T1059.003 T1584.001 T1005 T1114.001 T1114.002 T1585.002 T1036.005 T1135 T1588.001 T1588.002 T1003.001 T1566.001 T1566.002 T1057 T1021.001 T1016 T1049 T1007 T1550.002"
+  },
+  {
+    "source_type": "cti_summary",
+    "title": "APT12",
+    "text": "APT12 is a China-attributed threat group targeting media, high-tech companies, and governments. They are known for spearphishing and using vulnerabilities in Microsoft Office and Adobe products."
+  },
+  {
+    "source_type": "cti_techniques",
+    "title": "APT12",
+    "text": "T1568.003 T1203 T1566.001 T1204.002 T1102.002"
+  },
+  {
+    "source_type": "cti_summary",
+    "title": "Andariel",
+    "text": "Andariel is a North Korean state-sponsored threat group active since at least 2009. It has targeted South Korean military, government, and commercial entities, and conducted cyber financial operations against ATMs, banks, and cryptocurrency exchanges. It is considered a sub-group of Lazarus Group."
+  },
+  {
+    "source_type": "cti_techniques",
+    "title": "Andariel",
+    "text": "T1005 T1189 T1203 T1592.002 T1590.005 T1105 T1027.003 T1588.001 T1566.001 T1057 T1049 T1204.002"
+  },
+  {
+    "source_type": "cti_summary",
+    "title": "APT30",
+    "text": "APT30 is a Chinese threat group suspected to be government-backed. Known for long-term campaigns targeting Southeast Asian political entities."
+  },
+  {
+    "source_type": "cti_techniques",
+    "title": "APT30",
+    "text": "T1566.001 T1204.002"
   },
   {
     "source_type": "cti_summary",
@@ -32,17 +87,57 @@
   {
     "source_type": "cti_techniques",
     "title": "Lazarus Group",
-    "text": ""
+    "text": "T1059 T1071.001 T1566.001 T1027 T1105 T1485 T1078"
   },
   {
     "source_type": "cti_summary",
-    "title": "Cobalt Group",
-    "text": "Cobalt Group is a cybercrime group specializing in attacks on financial institutions, leveraging spearphishing and malware campaigns to conduct network intrusions and financial theft."
+    "title": "APT16",
+    "text": "APT16 is a China-based threat group that has launched spearphishing campaigns targeting Japanese and Taiwanese organizations."
   },
   {
     "source_type": "cti_techniques",
-    "title": "Cobalt Group",
-    "text": ""
+    "title": "APT16",
+    "text": "T1584.004"
+  },
+  {
+    "source_type": "cti_summary",
+    "title": "Aoqin Dragon",
+    "text": "Aoqin Dragon is a suspected Chinese cyber espionage group that has been active since at least 2013, targeting government, education, and telecom organizations in Australia, Cambodia, Hong Kong, Singapore, and Vietnam. Researchers associate it with UNC94 based on shared malware and infrastructure."
+  },
+  {
+    "source_type": "cti_techniques",
+    "title": "Aoqin Dragon",
+    "text": "T1587.001 T1203 T1083 T1570 T1036 T1027.002 T1588.002 T1091 T1204.002"
+  },
+  {
+    "source_type": "cti_summary",
+    "title": "APT28",
+    "text": "APT28 is a Russian cyber espionage group linked to the GRU's 85th Main Special Service Center. Active since at least 2004, APT28 has targeted political organizations, anti-doping agencies, nuclear facilities, and international organizations. Their operations have included hacking campaigns during the 2016 U.S. election and cyberattacks on critical infrastructure."
+  },
+  {
+    "source_type": "cti_techniques",
+    "title": "APT28",
+    "text": "T1134.001 T1098.002 T1583.001 T1583.003 T1583.006 T1595.002 T1557.004 T1071.001 T1071.003 T1560 T1560.001 T1119 T1547.001 T1037.001 T1110 T1110.001 T1110.003 T1059.001 T1059.003 T1092"
+  },
+  {
+    "source_type": "cti_summary",
+    "title": "ALLANITE",
+    "text": "ALLANITE is a suspected Russian cyber espionage group that has primarily targeted the electric utility sector within the United States and United Kingdom. Although similar to Dragonfly in tactics, ALLANITE has not exhibited destructive capabilities and is believed to focus on persistence and ICS process understanding."
+  },
+  {
+    "source_type": "cti_techniques",
+    "title": "ALLANITE",
+    "text": "T0817 T0852 T0865 T0859"
+  },
+  {
+    "source_type": "cti_summary",
+    "title": "APT29",
+    "text": "APT29 is a Russian cyber espionage group associated with the Russian Foreign Intelligence Service (SVR). It has targeted government, think tanks, and energy sectors globally using spearphishing and sophisticated malware campaigns."
+  },
+  {
+    "source_type": "cti_techniques",
+    "title": "APT29",
+    "text": "T1078 T1059.001 T1105 T1027 T1566.001 T1087 T1098 T1583 T1560 T1547 T1037 T1110 T1651 T1586 T1555"
   },
   {
     "source_type": "cti_summary",
@@ -52,31 +147,96 @@
   {
     "source_type": "cti_techniques",
     "title": "FIN7",
-    "text": ""
+    "text": "T1059.003 T1071.001 T1105 T1566.002 T1027 T1087"
   },
   {
-    "source_type": "log",
-    "event_id": 21,
-    "text": "mstsc.exe | user: administrator | time: 2025-04-28T17:00:00Z"
+    "source_type": "cti_summary",
+    "title": "admin@338",
+    "text": "admin@338 is a China-based cyber threat group. It has previously used newsworthy events as lures to deliver malware and has primarily targeted organizations involved in financial, economic, and trade policy, typically using publicly available RATs such as PoisonIvy, as well as some non-public backdoors."
   },
   {
-    "source_type": "log",
-    "event_id": 22,
-    "text": "svchost.exe | user: victim_user | time: 2025-04-28T16:40:00Z"
+    "source_type": "cti_techniques",
+    "title": "admin@338",
+    "text": "T1087.001 T1059.003 T1203 T1083 T1036.005 T1069.001 T1566.001 T1082 T1016 T1049 T1007 T1204.002"
   },
   {
-    "source_type": "log",
-    "event_id": 1,
-    "text": "net.exe | user: SYSTEM | time: 2025-04-28T16:10:00Z"
+    "source_type": "cti_summary",
+    "title": "APT17",
+    "text": "APT17 is a China-based threat group that has conducted network intrusions against US government entities and major industries. They are known for abusing Microsoft TechNet for infrastructure."
   },
   {
-    "source_type": "log",
-    "event_id": 3,
-    "text": "svchost.exe | user: victim_user | time: 2025-04-28T15:00:00Z"
+    "source_type": "cti_techniques",
+    "title": "APT17",
+    "text": "T1583.006 T1585"
   },
   {
-    "source_type": "log",
-    "event_id": 1,
-    "text": "powershell.exe | user: victim_user | time: 2025-04-28T14:25:00Z"
+    "source_type": "cti_summary",
+    "title": "APT18",
+    "text": "APT18 is a China-attributed group active since at least 2009, targeting a wide range of industries. They have used HTTP, DNS, and various obfuscation and persistence methods."
+  },
+  {
+    "source_type": "cti_techniques",
+    "title": "APT18",
+    "text": "T1071.001 T1071.004 T1547.001 T1059.003 T1133 T1083 T1070.004 T1105 T1027.013 T1053.002 T1082 T1078"
+  },
+  {
+    "source_type": "cti_summary",
+    "title": "APT3",
+    "text": "APT3 is a China-based threat group attributed to China's Ministry of State Security. They are responsible for multiple campaigns and are known for advanced credential theft and lateral movement."
+  },
+  {
+    "source_type": "cti_techniques",
+    "title": "APT3",
+    "text": "T1087.001 T1098.007 T1560.001 T1547.001 T1110.002 T1059.001 T1059.003 T1136.001 T1543.003 T1555.003 T1005 T1074.001 T1546.008 T1041 T1203 T1083 T1564.003 T1574.001 T1070.004 T1105 T1056.001 T1036.010 T1104 T1095 T1027 T1027.002 T1027.005 T1003.001 T1069 T1566.002 T1057 T1090.002 T1021.001 T1021.002 T1018 T1053.005 T1218.011 T1082 T1016 T1049 T1033 T1552.001 T1204.001 T1078.002"
+  },
+  {
+    "source_type": "cti_summary",
+    "title": "Cobalt Group",
+    "text": "Cobalt Group is a cybercrime group specializing in attacks on financial institutions, leveraging spearphishing and malware campaigns to conduct network intrusions and financial theft."
+  },
+  {
+    "source_type": "cti_techniques",
+    "title": "Cobalt Group",
+    "text": "T1566.001 T1059.001 T1078 T1105 T1027 T1087"
+  },
+  {
+    "source_type": "cti_summary",
+    "title": "APT33",
+    "text": "APT33 is a suspected Iranian threat group that has carried out operations since at least 2013. The group has targeted organizations across multiple industries in the United States, Saudi Arabia, and South Korea, with a particular interest in the aviation and energy sectors."
+  },
+  {
+    "source_type": "cti_techniques",
+    "title": "APT33",
+    "text": "T1071.001 T1560.001 T1547.001 T1110.003 T1059.001 T1059.005 T1555 T1555.003 T1132.001 T1573.001 T1546.003 T1048.003 T1203 T1068 T1105 T1040 T1571 T1027.013 T1588.002 T1003.001 T1003.004 T1003.005 T1566.001 T1566.002 T1053.005 T1552.001 T1552.006 T1204.001 T1204.002 T1078 T1078.004 T0852 T0853 T0865"
+  },
+  {
+    "source_type": "cti_summary",
+    "title": "APT32",
+    "text": "APT32 is a suspected Vietnam-based threat group targeting Southeast Asian countries and foreign entities. They have used strategic web compromises and diverse scripting techniques for compromise and persistence."
+  },
+  {
+    "source_type": "cti_techniques",
+    "title": "APT32",
+    "text": "T1087.001 T1583.001 T1583.006 T1071.001 T1071.003 T1560 T1547.001 T1059 T1059.001 T1059.003 T1059.005 T1059.007 T1543.003 T1189 T1585.001 T1048.003 T1041 T1203 T1068 T1083 T1222.002 T1589 T1589.002 T1564.001 T1564.003 T1564.004 T1574.001 T1070.001 T1070.004 T1070.006 T1105 T1056.001 T1570 T1036 T1036.003 T1036.004 T1036.005 T1112 T1046 T1135 T1571 T1027.010 T1027.011 T1027.013 T1027.016 T1588.002 T1137 T1003 T1003.001 T1566.001 T1566.002 T1598.003 T1055 T1012 T1021.002 T1018 T1053.005 T1505.003 T1072 T1608.001 T1608.004 T1218.005 T1218.010 T1218.011 T1082 T1016 T1049 T1033 T1216.001 T1569.002 T1552.002 T1550.002 T1550.003 T1204.001 T1204.002 T1078.003 T1102 T1047"
+  },
+  {
+    "source_type": "cti_summary",
+    "title": "APT-C-36",
+    "text": "APT-C-36 is a suspected South American espionage group active since at least 2018, targeting Colombian government institutions, financial corporations, petroleum industries, and professional manufacturing."
+  },
+  {
+    "source_type": "cti_techniques",
+    "title": "APT-C-36",
+    "text": "T1059.005 T1105 T1036.004 T1571 T1027 T1588.002 T1566.001 T1053.005 T1204.002"
+  },
+  {
+    "source_type": "cti_summary",
+    "title": "Akira",
+    "text": "Akira is a ransomware variant and ransomware deployment entity active since at least March 2023. Akira uses compromised credentials to access single-factor external access mechanisms such as VPNs for initial access, then various publicly-available tools and techniques for lateral movement. Akira operations are associated with 'double extortion' ransomware activity, where data is exfiltrated from victim environments prior to encryption, with threats to publish files if a ransom is not paid. Technical analysis of Akira ransomware indicates variants capable of targeting Windows or VMWare ESXi hypervisors and multiple overlaps with Conti ransomware."
+  },
+  {
+    "source_type": "cti_techniques",
+    "title": "Akira",
+    "text": "T1531 T1560.001 T1059.001 T1486 T1213.002 T1482 T1567.002 T1133 T1657 T1562.001 T1036.005 T1027.001 T1219 T1021.001 T1018 T1558 T1078"
   }
 ]

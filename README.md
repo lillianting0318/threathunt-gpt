@@ -11,6 +11,8 @@
 
 ## Table of Contents
 
+- [Motivation](#motivation)
+- [Author](#author)
 - [Overview](#overview)
 - [Architecture](#architecture)
 - [Quick Start](#quick-start)
@@ -25,6 +27,23 @@
 - [Supported Threat Groups](#supported-threat-groups)
 
 ---
+
+## Motivation
+
+SOC analysts spend significant time manually correlating threat intelligence
+reports with MITRE ATT&CK techniques, then translating findings into detection
+rules for their SIEM. During my internship at a managed detection and response
+company, I saw this workflow firsthand — it was slow, repetitive, and error-prone.
+ThreatHunt-GPT automates this pipeline end-to-end: from APT group query to
+deployable YARA, KQL, and SPL rules, using a 3-agent RAG architecture backed
+by 823 MITRE ATT&CK techniques. Built to explore **AI-augmented threat
+intelligence** and **LLM integration in real SOC workflows**.
+
+## Author
+
+**Li-Lin (Lillian) Ting**
+M.S. Data Science – Computational Linguistics, University of British Columbia (2025–2026) | CEH
+[LinkedIn](https://www.linkedin.com/in/lillian-ting) · [GitHub](https://github.com/lillianting0318)
 
 ## Overview
 

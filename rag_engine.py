@@ -151,14 +151,14 @@ class RAGEngine:
             if re.search(pattern, q_upper):
                 return name
 
-        # Pass 3: query 作為縮寫出現在 name（例如輸入 "lazarus" 匹配 "Lazarus Group"）
+        # Pass 3: query name（For example: "lazarus" match "Lazarus Group"）
         for name in self._cti_by_group:
             pattern = r'(?<![A-Z0-9])' + re.escape(q_upper) + r'(?![A-Z0-9])'
             if re.search(pattern, name.upper()):
                 return name
 
-        # Pass 4: 向量語意搜尋 fallback
-        results = self.vector_search(q, top_k=3)
+        # Pass 4: fallback
+        results = self.semantic_search(q, top_k=3)
         for r in results:
             if r.get("source_type") == "cti_summary":
                 candidate = r.get("title", "")

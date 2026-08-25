@@ -1,0 +1,8 @@
+# Deliberately NOT `-r requirements.txt` here.
+# conftest.py stubs out faiss/sentence-transformers so the unit test suite
+# never needs to install or download them (no FAISS index, no HF model
+# download, no torch). numpy is real because rag_engine.py imports it at
+# module level even though semantic_search() itself isn't exercised here.
+numpy>=2.0.0
+pytest>=8.0.0
+pytest-mock>=3.14.0

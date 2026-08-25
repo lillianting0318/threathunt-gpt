@@ -9,9 +9,9 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
-      - uses: actions/setup-python@v5
+      - uses: actions/setup-python@v6
         with:
           python-version: "3.11"
 
@@ -23,3 +23,29 @@ jobs:
 
       - name: Run tests
         run: pytest -q
+
+  build-and-push:
+    needs: test                       # image is built ONLY if the test job passed
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write                 # lets the built-in GITHUB_TOKEN push to GHCR
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Log in to GitHub Container Registry
+        uses: docker/login-action@v4
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build and push image
+        uses: docker/build-push-action@v7
+        with:
+          context: .
+          push: true
+          tags: |
+            ghcr.io/lillianting0318/threathunt-gpt:latest
+            ghcr.io/lillianting0318/threathunt-gpt:${{ github.sha }}

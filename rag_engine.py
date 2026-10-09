@@ -4,6 +4,8 @@ Handles FAISS vector search over MITRE ATT&CK techniques + CTI metadata.
 """
 
 import json
+import os
+import sys
 import numpy as np
 import faiss
 from sentence_transformers import SentenceTransformer
@@ -96,6 +98,7 @@ class RAGEngine:
         faiss_path: str = "combined_index.faiss",
         metadata_path: str = "combined_metadata.json",
         mitre_path: str = "combined_mitre.json",
+        aliases_path: str = "group_aliases.json",
     ):
         self.model = SentenceTransformer(EMBED_MODEL)
 
@@ -120,6 +123,20 @@ class RAGEngine:
             src = entry.get("source_type", "")
             self._cti_by_group[title][src] = entry.get("text", "")
 
+        # Optional alias table (built by build_aliases.py from MITRE STIX).
+        # Keep only aliases whose canonical group exists in our CTI data.
+        self._alias_to_group: Dict[str, str] = {}
+        if os.path.exists(aliases_path):
+            with open(aliases_path, "r") as f:
+                raw_aliases: Dict[str, str] = json.load(f)
+            self._alias_to_group = {
+                a: g for a, g in raw_aliases.items() if g in self._cti_by_group
+            }
+            print(f"Loaded {len(self._alias_to_group)} group aliases", file=sys.stderr)
+
+        added = self.enrich_index_with_mitre()
+        print(f"Enriched index with {added} MITRE technique entries", file=sys.stderr)
+
     # ------------------------------------------------------------------
     # Group lookups
     # ------------------------------------------------------------------
@@ -131,6 +148,7 @@ class RAGEngine:
         精確比對優先，避免 APT1 匹配到 APT12 的 bug。
         比對順序：
           1. 完整字串相等（大小寫不分）
+          1.5 MITRE 別名表（group_aliases.json，若存在）
           2. query 完整出現在 name 中，且前後是字詞邊界（word boundary）
           3. name 完整出現在 query 中，且前後是字詞邊界
           4. 向量語意搜尋 fallback
@@ -143,6 +161,12 @@ class RAGEngine:
         for name in self._cti_by_group:
             if name.upper() == q_upper:
                 return name
+
+        # Pass 1.5: 別名比對（例："Fancy Bear" -> "APT28"）
+        # Embeddings can't resolve codenames, so aliases are a structured lookup.
+        alias_hit = self._alias_to_group.get(q_upper)
+        if alias_hit:
+            return alias_hit
 
         # Pass 2: word-boundary 比對
         # 例："APT1" 不會匹配 "APT12" 因為 APT1 後面跟著數字
@@ -157,15 +181,27 @@ class RAGEngine:
             if re.search(pattern, name.upper()):
                 return name
 
-        # Pass 4: fallback
+        # Pass 4: semantic fallback — only accept a match that is close enough.
+        # Without a threshold, FAISS always returns *something*, so an unknown
+        # alias (e.g. "Fancy Bear") gets confidently mapped to the wrong group.
         results = self.semantic_search(q, top_k=3)
         for r in results:
             if r.get("source_type") == "cti_summary":
                 candidate = r.get("title", "")
-                if candidate in self._cti_by_group:
+                if candidate in self._cti_by_group and self._close_enough(r["score"]):
                     return candidate
 
         return None
+
+    # FAISS distance threshold for the semantic fallback (tune with real queries).
+    # METRIC_L2: smaller = closer.  METRIC_INNER_PRODUCT: larger = closer.
+    GROUP_MATCH_MAX_L2 = 1.0
+    GROUP_MATCH_MIN_IP = 0.5
+
+    def _close_enough(self, score: float) -> bool:
+        if self.index.metric_type == faiss.METRIC_INNER_PRODUCT:
+            return score >= self.GROUP_MATCH_MIN_IP
+        return score <= self.GROUP_MATCH_MAX_L2
 
     def get_cti_summary(self, group_name: str) -> str:
         data = self._cti_by_group.get(group_name, {})
@@ -208,6 +244,61 @@ class RAGEngine:
                         "domain": "unknown",
                     })
         return enriched
+
+    # ------------------------------------------------------------------
+    # Index enrichment (prototype)
+    # ------------------------------------------------------------------
+    def enrich_index_with_mitre(self) -> int:
+        """Append MITRE technique descriptions to the in-memory FAISS index.
+
+        The original on-disk corpus only has short group bios, so TTP-style
+        queries ("dump credentials from LSASS") have nothing to match. This
+        indexes each technique's `"{name}. {description}"` so those queries
+        land on the right technique entry (e.g. T1003.001).
+        """
+        import re
+        tid_re = re.compile(r"^T\d{4}(?:\.\d{3})?$")
+
+        new_texts: List[str] = []
+        new_meta: List[Dict] = []
+        seen = set(
+            d.get("title") for d in self.metadata
+            if d.get("source_type") == "mitre_technique"
+        )
+
+        def _add(tid: str, name: str, desc: str, domain: str) -> None:
+            if tid in seen or not desc:
+                return
+            seen.add(tid)
+            text = f"{name}. {desc}"
+            new_texts.append(text)
+            new_meta.append({
+                "title": tid,
+                "source_type": "mitre_technique",
+                "name": name,
+                "domain": domain,
+                "text": text,
+            })
+
+        for tid, entry in self.mitre_lookup.items():
+            if not tid_re.match(tid):
+                continue
+            _add(
+                tid,
+                entry.get("name", tid),
+                entry.get("description", ""),
+                entry.get("domain", "enterprise-attack"),
+            )
+        for tid, entry in ICS_TECHNIQUES.items():
+            _add(tid, entry["name"], entry["description"], entry["domain"])
+
+        if not new_texts:
+            return 0
+
+        vecs = np.array(self.model.encode(new_texts), dtype="float32")
+        self.index.add(vecs)
+        self.metadata.extend(new_meta)
+        return len(new_meta)
 
     # ------------------------------------------------------------------
     # Semantic vector search

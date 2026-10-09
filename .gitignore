@@ -1,0 +1,28 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+
+# Virtual envs
+venv/
+.venv/
+env/
+
+# Secrets / env
+.env
+.env.*
+!.env.example
+
+# macOS
+.DS_Store
+
+# IDE / tooling
+.vscode/
+.idea/
+.claude/
+
+# Node (if any tooling pulls it in)
+node_modules/
+package-lock.json

@@ -181,27 +181,90 @@ class RAGEngine:
             if re.search(pattern, name.upper()):
                 return name
 
-        # Pass 4: semantic fallback — only accept a match that is close enough.
-        # Without a threshold, FAISS always returns *something*, so an unknown
-        # alias (e.g. "Fancy Bear") gets confidently mapped to the wrong group.
-        results = self.semantic_search(q, top_k=3)
-        for r in results:
-            if r.get("source_type") == "cti_summary":
-                candidate = r.get("title", "")
-                if candidate in self._cti_by_group and self._close_enough(r["score"]):
-                    return candidate
+        # Pass 4: semantic fallback, guarded by distance AND margin.
+        #
+        # Two independent guards, because each catches what the other misses:
+        #
+        #   distance — is the best candidate plausibly related at all?
+        #       Rejects junk ("qwertyuiop" scores 1.72, past anything real)
+        #       even when nothing competes with it.
+        #
+        #   margin — is the best candidate clearly better than the runner-up?
+        #       Rejects coin-flips. "Iranian group that used the Shamoon wiper"
+        #       puts Andariel at 1.332 and the correct APT33 at 1.336; a 0.004
+        #       gap means the embedding cannot tell them apart, so answering
+        #       at all is guessing.
+        #
+        # Measured on eval/dataset.jsonl: distance alone (at any bound loose
+        # enough to accept real matches) returns wrong groups; margin alone
+        # accepts junk that happens to have no runner-up. Together: 0 wrong.
+        #
+        # top_k is deliberately wide. enrich_index_with_mitre() adds ~900
+        # technique vectors to an index holding only 24 group bios, so a
+        # descriptive query can fill its first hits with techniques and leave
+        # no group to compare against at all.
+        candidates = [
+            r for r in self.semantic_search(q, top_k=self.GROUP_SEARCH_TOP_K)
+            if r.get("source_type") == "cti_summary"
+            and r.get("title", "") in self._cti_by_group
+        ]
+        if not candidates:
+            return None
 
-        return None
+        best = candidates[0]
+        runner_up = candidates[1]["score"] if len(candidates) > 1 else None
 
-    # FAISS distance threshold for the semantic fallback (tune with real queries).
+        if not self._close_enough(best["score"]):
+            return None
+        if not self._clear_winner(best["score"], runner_up):
+            return None
+
+        return best.get("title", "")
+
+    # How many raw hits to pull before filtering down to group summaries.
+    # The index is ~97% MITRE technique vectors, so a narrow top_k often
+    # returns no group at all.
+    GROUP_SEARCH_TOP_K = 20
+
+    # Tuned on eval/dataset.jsonl (sweep: eval/diagnose_margin.py).
     # METRIC_L2: smaller = closer.  METRIC_INNER_PRODUCT: larger = closer.
-    GROUP_MATCH_MAX_L2 = 1.0
+    #
+    # The L2 bounds are measured. The previous MAX_L2 of 1.0 sat below the
+    # entire observed score distribution — the best correct match scores
+    # 1.026 — so this fallback had never once fired.
+    #
+    # 1.45 clears the real matches (1.03–1.41) and excludes junk (1.72+) and
+    # near-misses like "Wizard Spider" (1.534). 1.60 also scores 0 wrong but
+    # leaves that one to the margin guard alone, so the tighter bound stays.
+    GROUP_MATCH_MAX_L2 = 1.45
+    GROUP_MATCH_MIN_MARGIN_L2 = 0.20
+
+    # NOT measured: the index in use is L2, so these inner-product values are
+    # still the original guesses. Re-run the sweep before trusting an IP index.
     GROUP_MATCH_MIN_IP = 0.5
+    GROUP_MATCH_MIN_MARGIN_IP = 0.05
+
+    def _is_inner_product(self) -> bool:
+        return self.index.metric_type == faiss.METRIC_INNER_PRODUCT
 
     def _close_enough(self, score: float) -> bool:
-        if self.index.metric_type == faiss.METRIC_INNER_PRODUCT:
+        """Is the best candidate plausibly related to the query at all?"""
+        if self._is_inner_product():
             return score >= self.GROUP_MATCH_MIN_IP
         return score <= self.GROUP_MATCH_MAX_L2
+
+    def _clear_winner(self, best: float, runner_up: Optional[float]) -> bool:
+        """Is the best candidate distinguishable from the next one?
+
+        No runner-up inside top_k means nothing competes, which counts as
+        clear — _close_enough() is what rejects those cases when the single
+        candidate is simply far away.
+        """
+        if runner_up is None:
+            return True
+        if self._is_inner_product():
+            return (best - runner_up) >= self.GROUP_MATCH_MIN_MARGIN_IP
+        return (runner_up - best) >= self.GROUP_MATCH_MIN_MARGIN_L2
 
     def get_cti_summary(self, group_name: str) -> str:
         data = self._cti_by_group.get(group_name, {})

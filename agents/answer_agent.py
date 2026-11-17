@@ -59,7 +59,7 @@ def _call_llm(prompt: str) -> str:
 
     try:
         response = client.chat.completions.create(
-            model="llama-3.3-70b-versatile",
+            model="openai/gpt-oss-120b",
             messages=[
                 {
                     "role": "system",
@@ -72,9 +72,10 @@ def _call_llm(prompt: str) -> str:
                 {"role": "user", "content": prompt},
             ],
             temperature=0.3,
-            max_tokens=600,
+            max_tokens=2048,
+            extra_body={"reasoning_effort": "low"},
         )
-        return response.choices[0].message.content.strip()
+        return (response.choices[0].message.content or "").strip()
     except Exception as e:
         return f"⚠ Groq API 錯誤：{e}"
 

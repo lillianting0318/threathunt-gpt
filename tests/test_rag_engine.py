@@ -1,22 +1,15 @@
 """
 tests/test_rag_engine.py — core lookup logic
 
-Covers the three-layer group resolution in RAGEngine.find_group():
-  1. exact match
-  2. word-boundary substring match  (must NOT let "APT1" match "APT12")
-  3. abbreviation match             ("lazarus" -> "Lazarus Group")
-  4. semantic search fallback
+Covers the group resolution in RAGEngine.find_group():
+  1.  exact match
+  1.5 MITRE codename alias table
+  2.  word-boundary substring match  (must NOT let "APT1" match "APT12")
+  3.  abbreviation match             ("lazarus" -> "Lazarus Group")
+  4.  semantic search fallback, gated by distance AND margin
 
 Also covers enrich_ttps()'s three-way fallback:
   known enterprise technique -> known ICS technique -> unknown technique stub.
-
-KNOWN BUG (see test_find_group_pass4_is_broken_without_the_alias below):
-  find_group()'s Pass 4 calls self.vector_search(...), but RAGEngine only
-  defines semantic_search(). Any query that doesn't match Pass 1-3 currently
-  raises AttributeError instead of falling back to semantic search. Fix:
-  rename the call on rag_engine.py line ~161 from vector_search to
-  semantic_search. Tests below alias vector_search -> semantic_search via
-  monkeypatch to test the *intended* Pass 4 behavior in the meantime.
 """
 import pytest
 from rag_engine import ICS_TECHNIQUES
@@ -59,12 +52,9 @@ def test_find_group_rejects_partial_digit_match(rag, monkeypatch):
     # A query containing "APT1" immediately followed by another digit
     # should not resolve to "APT1" via Pass 2 (would incorrectly match
     # inside "APT12"-like tokens if boundary checking were broken).
-    # Passes 1-3 correctly find no match here, so this also exercises the
-    # Pass 4 fallback -> same vector_search/semantic_search alias needed
-    # as in test_find_group_falls_back_to_semantic_search (see BUGS note
-    # at the top of this file).
-    monkeypatch.setattr(rag, "semantic_search", lambda query, top_k=3: [])
-    monkeypatch.setattr(rag, "vector_search", rag.semantic_search, raising=False)
+    # Passes 1-3 correctly find no match here, so Pass 4 runs with an
+    # empty retrieval and must return None rather than inventing a group.
+    monkeypatch.setattr(rag, "semantic_search", lambda query, top_k=20: [])
     assert rag.find_group("APT123456") is None
 
 
@@ -80,46 +70,103 @@ def test_find_group_abbreviation_match(rag):
 # Pass 4: semantic search fallback
 # ---------------------------------------------------------------------------
 
+def _hits(*pairs):
+    """Build a fake semantic_search() return value from (title, score) pairs."""
+    return [
+        {"source_type": "cti_summary", "title": title, "score": score}
+        for title, score in pairs
+    ]
+
+
 def test_find_group_falls_back_to_semantic_search(rag, monkeypatch):
     """
     No exact/word-boundary/abbreviation match exists for this query, so
-    find_group() must fall through to its vector-search fallback and
-    resolve using whatever that search returns.
+    find_group() falls through to Pass 4 and resolves on the retrieval —
+    a close match (1.10 < 1.45) with a wide margin (0.50 > 0.20).
     """
     monkeypatch.setattr(
         rag,
         "semantic_search",
-        lambda query, top_k=3: [
-            {"source_type": "cti_summary", "title": "Lazarus Group"}
-        ],
+        lambda query, top_k=20: _hits(("Lazarus Group", 1.10), ("APT1", 1.60)),
     )
-    # find_group() currently calls self.vector_search(), which does not
-    # exist on RAGEngine (only semantic_search() does). We alias it here
-    # so this test documents the *intended* behavior of Pass 4.
-    # See BUGS.md / the note in the PR description: this alias should be
-    # removed once vector_search -> semantic_search is fixed in rag_engine.py.
-    monkeypatch.setattr(rag, "vector_search", rag.semantic_search, raising=False)
-
-    assert rag.find_group("a group known for supply chain attacks and destructive wipers") == "Lazarus Group"
+    assert rag.find_group(
+        "a group known for supply chain attacks and destructive wipers"
+    ) == "Lazarus Group"
 
 
 def test_find_group_returns_none_when_nothing_matches(rag, monkeypatch):
-    monkeypatch.setattr(rag, "semantic_search", lambda query, top_k=3: [])
-    monkeypatch.setattr(rag, "vector_search", rag.semantic_search, raising=False)
-
+    monkeypatch.setattr(rag, "semantic_search", lambda query, top_k=20: [])
     assert rag.find_group("completely unrelated nonsense query") is None
 
 
-def test_find_group_pass4_is_broken_without_the_alias(rag):
+# ---------------------------------------------------------------------------
+# Pass 4's two guards. Both are needed: each rejects what the other accepts.
+# Thresholds here are tuned on eval/dataset.jsonl; see eval/diagnose_margin.py.
+# ---------------------------------------------------------------------------
+
+def test_find_group_rejects_a_distant_best_match(rag, monkeypatch):
     """
-    This test documents the actual bug as of this writing: find_group()
-    calls self.vector_search(), but RAGEngine only defines semantic_search().
-    Once rag_engine.py is fixed to call self.semantic_search() directly,
-    this test should be updated to assert the fallback works with NO
-    monkeypatch alias needed, and this test can be deleted.
+    Junk queries ("qwertyuiop") retrieve a single group with nothing near it,
+    so the margin check passes trivially. Only the distance bound stops them.
     """
-    with pytest.raises(AttributeError):
-        rag.find_group("some query with no exact or substring match at all")
+    monkeypatch.setattr(
+        rag, "semantic_search", lambda query, top_k=20: _hits(("APT1", 1.80))
+    )
+    assert rag.find_group("qwertyuiop") is None
+
+
+def test_find_group_rejects_a_coin_flip(rag, monkeypatch):
+    """
+    Both candidates are inside the distance bound, but 0.004 apart: the
+    embedding cannot tell them apart, so answering at all is guessing.
+    This is the real "Iranian group that used the Shamoon wiper" case.
+    """
+    monkeypatch.setattr(
+        rag,
+        "semantic_search",
+        lambda query, top_k=20: _hits(("APT12", 1.332), ("APT1", 1.336)),
+    )
+    assert rag.find_group("an espionage group that targets media outlets") is None
+
+
+def test_find_group_ignores_non_group_hits_when_measuring_margin(rag, monkeypatch):
+    """
+    The index is ~97% MITRE technique vectors after enrich_index_with_mitre().
+    The margin must be measured between *groups*, not against whatever
+    technique happens to rank in between, or a good match gets rejected by a
+    neighbour it was never competing with.
+    """
+    monkeypatch.setattr(
+        rag,
+        "semantic_search",
+        lambda query, top_k=20: [
+            {"source_type": "mitre_technique", "title": "T1059", "score": 1.05},
+            {"source_type": "cti_summary", "title": "Lazarus Group", "score": 1.10},
+            {"source_type": "mitre_technique", "title": "T1071", "score": 1.12},
+            {"source_type": "cti_summary", "title": "APT1", "score": 1.40},
+        ],
+    )
+    assert rag.find_group(
+        "destructive wiper attacks attributed to a state actor"
+    ) == "Lazarus Group"
+
+
+def test_find_group_ignores_groups_not_in_the_cti_data(rag, monkeypatch):
+    """
+    enrich_index_with_mitre() puts vectors in the index that have no entry in
+    _cti_by_group. Returning one of those would hand the agents a group name
+    they cannot look up, so they must not count as candidates at all —
+    including when one wins the retrieval outright.
+    """
+    monkeypatch.setattr(
+        rag,
+        "semantic_search",
+        lambda query, top_k=20: _hits(("Wizard Spider", 1.10), ("APT1", 1.15)),
+    )
+    # Wizard Spider ranks first but has no CTI entry, so it is dropped and
+    # APT1 is left uncontested. Note what this costs: a 0.05 loss becomes the
+    # answer purely because its only rival was unusable.
+    assert rag.find_group("a ransomware crew running TrickBot") == "APT1"
 
 
 # ---------------------------------------------------------------------------

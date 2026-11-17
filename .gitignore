@@ -26,3 +26,6 @@ env/
 # Node (if any tooling pulls it in)
 node_modules/
 package-lock.json
+
+# pytest
+.pytest_cache/

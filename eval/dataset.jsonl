@@ -1,0 +1,57 @@
+{"id": "ex-01", "query": "APT28", "expected": "APT28", "kind": "exact"}
+{"id": "ex-02", "query": "Lazarus Group", "expected": "Lazarus Group", "kind": "exact"}
+{"id": "ex-03", "query": "FIN7", "expected": "FIN7", "kind": "exact"}
+{"id": "ex-04", "query": "Akira", "expected": "Akira", "kind": "exact"}
+{"id": "ex-05", "query": "ALLANITE", "expected": "ALLANITE", "kind": "exact"}
+{"id": "ex-06", "query": "admin@338", "expected": "admin@338", "kind": "exact"}
+{"id": "ex-07", "query": "Aoqin Dragon", "expected": "Aoqin Dragon", "kind": "exact"}
+{"id": "al-01", "query": "Fancy Bear", "expected": "APT28", "kind": "alias"}
+{"id": "al-02", "query": "Cozy Bear", "expected": "APT29", "kind": "alias"}
+{"id": "al-03", "query": "Comment Crew", "expected": "APT1", "kind": "alias"}
+{"id": "al-04", "query": "Buckeye", "expected": "APT3", "kind": "alias"}
+{"id": "al-05", "query": "OceanLotus", "expected": "APT32", "kind": "alias"}
+{"id": "al-06", "query": "Hidden Cobra", "expected": "Lazarus Group", "kind": "alias"}
+{"id": "al-07", "query": "Carbon Spider", "expected": "FIN7", "kind": "alias"}
+{"id": "al-08", "query": "Rocket Kitten", "expected": "Ajax Security Team", "kind": "alias"}
+{"id": "al-09", "query": "Numbered Panda", "expected": "APT12", "kind": "alias"}
+{"id": "al-10", "query": "Elfin", "expected": "APT33", "kind": "alias"}
+{"id": "al-11", "query": "Forest Blizzard", "expected": "APT28", "kind": "alias_modern"}
+{"id": "al-12", "query": "Midnight Blizzard", "expected": "APT29", "kind": "alias_modern"}
+{"id": "al-13", "query": "Onyx Sleet", "expected": "Andariel", "kind": "alias_modern"}
+{"id": "al-14", "query": "Peach Sandstorm", "expected": "APT33", "kind": "alias_modern"}
+{"id": "al-15", "query": "Sangria Tempest", "expected": "FIN7", "kind": "alias_modern"}
+{"id": "pa-01", "query": "lazarus", "expected": "Lazarus Group", "kind": "partial"}
+{"id": "pa-02", "query": "cobalt group", "expected": "Cobalt Group", "kind": "partial"}
+{"id": "pa-03", "query": "ajax security team", "expected": "Ajax Security Team", "kind": "partial"}
+{"id": "pa-04", "query": "Tell me about APT29", "expected": "APT29", "kind": "partial"}
+{"id": "pa-05", "query": "What techniques does FIN7 use?", "expected": "FIN7", "kind": "partial"}
+{"id": "pa-06", "query": "I need a hunt plan for APT33", "expected": "APT33", "kind": "partial"}
+{"id": "pa-07", "query": "aoqin dragon", "expected": "Aoqin Dragon", "kind": "partial"}
+{"id": "co-01", "query": "APT1", "expected": "APT1", "kind": "collision"}
+{"id": "co-02", "query": "APT12", "expected": "APT12", "kind": "collision"}
+{"id": "co-03", "query": "APT16", "expected": "APT16", "kind": "collision"}
+{"id": "co-04", "query": "APT17", "expected": "APT17", "kind": "collision"}
+{"id": "co-05", "query": "APT18", "expected": "APT18", "kind": "collision"}
+{"id": "co-06", "query": "APT19", "expected": "APT19", "kind": "collision"}
+{"id": "co-07", "query": "APT3", "expected": "APT3", "kind": "collision"}
+{"id": "co-08", "query": "APT30", "expected": "APT30", "kind": "collision"}
+{"id": "co-09", "query": "APT32", "expected": "APT32", "kind": "collision"}
+{"id": "co-10", "query": "APT33", "expected": "APT33", "kind": "collision"}
+{"id": "co-11", "query": "APT-C-23", "expected": "APT-C-23", "kind": "collision"}
+{"id": "co-12", "query": "APT-C-36", "expected": "APT-C-36", "kind": "collision"}
+{"id": "de-01", "query": "the group behind the SolarWinds supply chain compromise", "expected": "APT29", "kind": "descriptive"}
+{"id": "de-02", "query": "North Korean actors who stole funds from banks over SWIFT", "expected": "Lazarus Group", "kind": "descriptive"}
+{"id": "de-03", "query": "Russian military intelligence unit that targeted the DNC in 2016", "expected": "APT28", "kind": "descriptive"}
+{"id": "de-04", "query": "Chinese PLA Unit 61398", "expected": "APT1", "kind": "descriptive"}
+{"id": "de-05", "query": "financially motivated group that targeted point-of-sale systems in US restaurants", "expected": "FIN7", "kind": "descriptive"}
+{"id": "de-06", "query": "Iranian group that used the Shamoon wiper against Saudi energy firms", "expected": "APT33", "kind": "descriptive"}
+{"id": "oo-01", "query": "Sandworm Team", "expected": null, "kind": "out_of_scope"}
+{"id": "oo-02", "query": "Volt Typhoon", "expected": null, "kind": "out_of_scope"}
+{"id": "oo-03", "query": "Wizard Spider", "expected": null, "kind": "out_of_scope"}
+{"id": "oo-04", "query": "Kimsuky", "expected": null, "kind": "out_of_scope"}
+{"id": "oo-05", "query": "Charming Kitten", "expected": null, "kind": "out_of_scope"}
+{"id": "oo-06", "query": "Equation Group", "expected": null, "kind": "out_of_scope"}
+{"id": "oo-07", "query": "Turla", "expected": null, "kind": "out_of_scope"}
+{"id": "oo-08", "query": "qwertyuiop", "expected": null, "kind": "out_of_scope"}
+{"id": "oo-09", "query": "what is the weather in Vancouver today", "expected": null, "kind": "out_of_scope"}
+{"id": "oo-10", "query": "how do I reset my password", "expected": null, "kind": "out_of_scope"}

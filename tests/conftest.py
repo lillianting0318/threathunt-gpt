@@ -22,7 +22,14 @@ import pytest
 if "faiss" not in sys.modules:
     fake_faiss = types.ModuleType("faiss")
     fake_faiss.read_index = lambda path: None
+    # find_group()'s Pass 4 branches on the index metric to decide whether a
+    # higher or a lower score means "closer", so the stub needs the constants.
+    # Values match real FAISS.
+    fake_faiss.METRIC_INNER_PRODUCT = 0
+    fake_faiss.METRIC_L2 = 1
     sys.modules["faiss"] = fake_faiss
+
+import faiss  # noqa: E402  (the stub above, or the real thing if installed)
 
 if "sentence_transformers" not in sys.modules:
     fake_st = types.ModuleType("sentence_transformers")
@@ -76,8 +83,13 @@ def rag():
         # "unknown technique" fallback path in enrich_ttps().
     }
 
+    # Pass 1.5 looks up MITRE codename aliases. Empty here so these tests
+    # exercise Passes 1-4 only; alias resolution has its own tests.
+    engine._alias_to_group = {}
+
     engine.metadata = []
-    engine.index = None
+    # Pass 4 reads index.metric_type to know which direction "closer" is.
+    engine.index = types.SimpleNamespace(metric_type=faiss.METRIC_L2)
     engine.model = None
 
     return engine

@@ -1,6 +1,5 @@
 """
 ThreatHunt-GPT — Streamlit UI
-暗色系網路安全美學介面
 """
 
 import streamlit as st
@@ -510,8 +509,16 @@ with st.sidebar:
     col_add, col_run = st.columns(2)
     with col_add:
         if st.button("+ ADD", use_container_width=True, key="btn_add_compare"):
-            g = st.session_state.selected_group
-            if g and g not in st.session_state.compare_groups:
+            # The sidebar buttons set selected_group, but typing in the query box
+            # does not — fall back to the box and resolve it to a real group.
+            raw = (st.session_state.selected_group
+                or st.session_state.get("query_input", "")).strip()
+            g = rag.find_group(raw) if raw else None
+            if not g:
+                st.warning("No matching group — pick one from the list below.")
+            elif g in st.session_state.compare_groups:
+                st.info(f"{g} is already in the comparison list.")
+            else:
                 st.session_state.compare_groups.append(g)
                 st.rerun()
     with col_run:

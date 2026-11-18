@@ -526,6 +526,8 @@ with st.sidebar:
             if len(st.session_state.compare_groups) >= 2:
                 st.session_state.compare_mode = True
                 st.rerun()
+            else:
+                st.info("Add at least 2 groups to compare.")
 
     if st.button("✕ CLEAR", use_container_width=True, key="btn_clear_compare"):
         st.session_state.compare_groups = []
@@ -740,7 +742,7 @@ if (run_btn or auto_run) and query.strip():
 elif not query.strip() and run_btn:
     st.markdown("""
     <div class="error-box">
-    請輸入查詢內容或從側邊欄選擇威脅組織
+    Enter a threat actor name, or pick one from the sidebar.
     </div>
     """, unsafe_allow_html=True)
 
@@ -762,7 +764,7 @@ elif st.session_state.compare_mode and len(st.session_state.compare_groups) >= 2
                 compare_results.append(r)
 
     if not compare_results:
-        st.markdown('<div class="error-box">比較失敗：找不到任何組織資料</div>', unsafe_allow_html=True)
+        st.markdown('<div class="error-box">Comparison failed: no data found for any of the selected groups.</div>', unsafe_allow_html=True)
         st.stop()
 
     # ── Summary stats row ──────────────────
@@ -852,7 +854,7 @@ elif st.session_state.compare_mode and len(st.session_state.compare_groups) >= 2
     with ctab2:
         for r in compare_results:
             st.markdown(f'<div class="section-label">{r["group"]}</div>', unsafe_allow_html=True)
-            st.markdown(f'<div class="info-card">{r["cti"]["cti_summary"]}</div>', unsafe_allow_html=True)
+            st.markdown(f'<div class="info-card">{r["cti"]["summary"]}</div>', unsafe_allow_html=True)
 
     # ── Tab 3: TTP Breakdown ───────────────
     with ctab3:

@@ -13,6 +13,11 @@ from typing import List, Dict, Any, Optional
 
 EMBED_MODEL = "all-MiniLM-L6-v2"
 
+# Resolve the data files against this file, not the working directory.
+# An MCP client launches the server from an arbitrary CWD, where a relative
+# path either crashes (the FAISS index) or silently loads nothing (aliases).
+_HERE = os.path.dirname(os.path.abspath(__file__))
+
 
 
 # ── ICS ATT&CK technique fallback (T0xxx not in enterprise JSON) ──────
@@ -95,11 +100,16 @@ ICS_TECHNIQUES: Dict[str, Dict] = {
 class RAGEngine:
     def __init__(
         self,
-        faiss_path: str = "combined_index.faiss",
-        metadata_path: str = "combined_metadata.json",
-        mitre_path: str = "combined_mitre.json",
-        aliases_path: str = "group_aliases.json",
+        faiss_path:    Optional[str] = None,
+        metadata_path: Optional[str] = None,
+        mitre_path:    Optional[str] = None,
+        aliases_path:  Optional[str] = None,
     ):
+        faiss_path    = faiss_path    or os.path.join(_HERE, "combined_index.faiss")
+        metadata_path = metadata_path or os.path.join(_HERE, "combined_metadata.json")
+        mitre_path    = mitre_path    or os.path.join(_HERE, "combined_mitre.json")
+        aliases_path  = aliases_path  or os.path.join(_HERE, "group_aliases.json")
+
         self.model = SentenceTransformer(EMBED_MODEL)
 
         # Load FAISS index + CTI metadata

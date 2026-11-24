@@ -645,8 +645,11 @@ if (run_btn or auto_run) and query.strip():
             <div class="stat-label">Techniques</div>
         </div>""", unsafe_allow_html=True)
     with c3:
-        match_badge = "EXACT"
-        badge_color = "#00ffa0" if match_badge == "EXACT" else "#ffc800"
+        method = result.get("match_method") or "unknown"
+        match_badge = method.replace("_", " ").upper()
+        # Deterministic passes in green; the semantic fallback in amber,
+        # because it is the only pass that can resolve to the wrong group.
+        badge_color = "#ffc800" if method == "semantic" else "#00ffa0"
         st.markdown(f"""
         <div class="stat-card">
             <div class="stat-number" style="font-size:1rem; color:{badge_color};">{match_badge}</div>

@@ -35,8 +35,11 @@ def run_pipeline(
     CTI Agent → TTP Agent → Answer Agent
 
     Returns a dict with all agent outputs, or an error dict.
+
+    The group is resolved exactly once here; the agents receive the
+    canonical name and never re-resolve it.
     """
-    matched = rag.find_group(group_name)
+    matched, match_method = rag.resolve_group(group_name)
     if not matched:
         available = rag.get_group_names()
         return {
@@ -61,8 +64,9 @@ def run_pipeline(
     )
 
     return {
-        "status": "ok",
-        "group":  matched,
+        "status":       "ok",
+        "group":        matched,
+        "match_method": match_method,
         "cti":    cti_result,
         "ttp":    ttp_result,
         "answer": answer_result,

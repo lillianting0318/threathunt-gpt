@@ -228,3 +228,39 @@ def test_enrich_ttps_description_is_truncated_to_500_chars(rag):
 def test_enrich_ttps_preserves_input_order(rag):
     result = rag.enrich_ttps(["T1071", "T1059", "T9999"])
     assert [r["id"] for r in result] == ["T1071", "T1059", "T9999"]
+
+
+# ---------------------------------------------------------------------------
+# resolve_group(): reports which pass matched
+# ---------------------------------------------------------------------------
+
+def test_resolve_group_reports_exact(rag):
+    assert rag.resolve_group("apt1") == ("APT1", "exact")
+
+
+def test_resolve_group_reports_alias(rag, monkeypatch):
+    monkeypatch.setattr(rag, "_alias_to_group", {"COMMENT CREW": "APT1"})
+    assert rag.resolve_group("Comment Crew") == ("APT1", "alias")
+
+
+def test_resolve_group_reports_word_boundary(rag):
+    assert rag.resolve_group("investigating APT1 activity") == ("APT1", "word_boundary")
+
+
+def test_resolve_group_reports_substring(rag):
+    assert rag.resolve_group("lazarus") == ("Lazarus Group", "substring")
+
+
+def test_resolve_group_reports_semantic(rag, monkeypatch):
+    monkeypatch.setattr(
+        rag, "semantic_search",
+        lambda query, top_k=20: _hits(("Lazarus Group", 1.10), ("APT1", 1.60)),
+    )
+    assert rag.resolve_group(
+        "a group known for supply chain attacks and destructive wipers"
+    ) == ("Lazarus Group", "semantic")
+
+
+def test_resolve_group_returns_none_pair_when_nothing_matches(rag, monkeypatch):
+    monkeypatch.setattr(rag, "semantic_search", lambda query, top_k=20: [])
+    assert rag.resolve_group("completely unrelated nonsense query") == (None, None)

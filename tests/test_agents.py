@@ -30,8 +30,9 @@ class FakeRAG:
         self._groups = groups or {}
         self._ttps = ttps or {}
 
-    def find_group(self, query):
-        return query if query in self._groups else None
+    # No find_group()/resolve_group(): agents receive a canonical name
+    # from run_pipeline() and must not re-resolve it. If an agent tried,
+    # these tests would fail with AttributeError.
 
     def get_group_names(self):
         return sorted(self._groups.keys())

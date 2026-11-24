@@ -11,14 +11,14 @@ def run_ttp_agent(group_name: str, rag) -> Dict[str, Any]:
     Retrieve and enrich TTPs for a named threat group.
 
     Args:
-        group_name: exact group name (e.g. "APT28")
+        group_name: canonical group name, already resolved by the caller
+                    (run_pipeline). This agent does not resolve aliases.
         rag: RAGEngine instance
 
     Returns:
         dict with group, ttp_count, ttps (enriched list)
     """
-    matched = rag.find_group(group_name)
-    if not matched:
+    if group_name not in rag.get_group_names():
         return {
             "status": "not_found",
             "group": group_name,
@@ -26,11 +26,11 @@ def run_ttp_agent(group_name: str, rag) -> Dict[str, Any]:
             "ttps": [],
         }
 
-    ttp_ids = rag.get_ttp_ids(matched)
+    ttp_ids = rag.get_ttp_ids(group_name)
     if not ttp_ids:
         return {
             "status": "no_ttps",
-            "group": matched,
+            "group": group_name,
             "ttp_count": 0,
             "ttps": [],
         }
@@ -38,7 +38,7 @@ def run_ttp_agent(group_name: str, rag) -> Dict[str, Any]:
     enriched = rag.enrich_ttps(ttp_ids)
     return {
         "status": "ok",
-        "group": matched,
+        "group": group_name,
         "ttp_count": len(enriched),
         "ttps": enriched,
     }

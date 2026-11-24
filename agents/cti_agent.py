@@ -11,14 +11,14 @@ def run_cti_agent(group_name: str, rag) -> Dict[str, Any]:
     Retrieve CTI summary for a named threat group.
 
     Args:
-        group_name: exact group name (e.g. "APT28")
+        group_name: canonical group name, already resolved by the caller
+                    (run_pipeline). This agent does not resolve aliases.
         rag: RAGEngine instance
 
     Returns:
         dict with group, summary, status
     """
-    matched = rag.find_group(group_name)
-    if not matched:
+    if group_name not in rag.get_group_names():
         return {
             "status": "not_found",
             "group": group_name,
@@ -26,9 +26,9 @@ def run_cti_agent(group_name: str, rag) -> Dict[str, Any]:
                        f"Available groups: {', '.join(rag.get_group_names())}",
         }
 
-    summary = rag.get_cti_summary(matched)
+    summary = rag.get_cti_summary(group_name)
     return {
         "status": "ok",
-        "group": matched,
+        "group": group_name,
         "summary": summary,
     }

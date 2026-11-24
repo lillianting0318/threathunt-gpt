@@ -10,11 +10,14 @@ import pipeline
 
 
 class FakeRAG:
-    def __init__(self, known_group=None):
+    def __init__(self, known_group=None, method="exact"):
         self.known_group = known_group
+        self.method = method
 
-    def find_group(self, query):
-        return self.known_group if query == self.known_group else None
+    def resolve_group(self, query):
+        if query == self.known_group:
+            return self.known_group, self.method
+        return None, None
 
     def get_group_names(self):
         return [self.known_group] if self.known_group else []
@@ -80,3 +83,65 @@ def test_run_pipeline_happy_path_wires_all_three_agents(monkeypatch):
     assert result["cti"]["summary"] == "APT1 summary"
     assert result["ttp"]["ttp_count"] == 1
     assert result["answer"]["yara_rule"] == "rule X {}"
+
+
+class CountingRAG:
+    """Real agents run against this; it counts every group resolution."""
+
+    def __init__(self):
+        self.resolve_calls = 0
+        self.find_calls = 0
+
+    def resolve_group(self, query):
+        self.resolve_calls += 1
+        return ("APT28", "alias") if query == "Fancy Bear" else (None, None)
+
+    def find_group(self, query):
+        self.find_calls += 1
+        return self.resolve_group(query)[0]
+
+    def get_group_names(self):
+        return ["APT28"]
+
+    def get_cti_summary(self, group_name):
+        return "APT28 summary"
+
+    def get_ttp_ids(self, group_name):
+        return ["T1059"]
+
+    def enrich_ttps(self, ttp_ids):
+        return [{"id": t, "name": "CLI", "description": "", "domain": "enterprise-attack"} for t in ttp_ids]
+
+
+def test_run_pipeline_resolves_the_group_exactly_once(monkeypatch):
+    """
+    Regression test for M1: the pipeline used to call find_group() three
+    times per request (pipeline, CTI agent, TTP agent). With a Pass 4
+    query that meant three embedding computations for one answer.
+    """
+    rag = CountingRAG()
+    monkeypatch.setattr(
+        pipeline, "run_answer_agent",
+        lambda group, cti_summary, ttps, llm=None: {"status": "ok", "group": group},
+    )
+
+    result = pipeline.run_pipeline("Fancy Bear", rag)
+
+    assert result["status"] == "ok"
+    assert result["group"] == "APT28"
+    assert rag.resolve_calls == 1
+    assert rag.find_calls == 0
+
+
+def test_run_pipeline_reports_how_the_group_was_matched(monkeypatch):
+    rag = FakeRAG(known_group="APT1", method="semantic")
+    monkeypatch.setattr(pipeline, "run_cti_agent",
+                        lambda group, rag: {"status": "ok", "group": group, "summary": "s"})
+    monkeypatch.setattr(pipeline, "run_ttp_agent",
+                        lambda group, rag: {"status": "ok", "group": group, "ttp_count": 0, "ttps": []})
+    monkeypatch.setattr(pipeline, "run_answer_agent",
+                        lambda group, cti_summary, ttps, llm=None: {"status": "ok"})
+
+    result = pipeline.run_pipeline("APT1", rag)
+
+    assert result["match_method"] == "semantic"

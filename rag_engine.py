@@ -9,7 +9,7 @@ import sys
 import numpy as np
 import faiss
 from sentence_transformers import SentenceTransformer
-from typing import List, Dict, Any, Optional
+from typing import List, Dict, Any, Optional, Tuple
 
 EMBED_MODEL = "all-MiniLM-L6-v2"
 
@@ -154,7 +154,19 @@ class RAGEngine:
         return sorted(self._cti_by_group.keys())
 
     def find_group(self, query: str) -> Optional[str]:
+        """Return the canonical group name for `query`, or None.
+
+        Thin wrapper over resolve_group() for callers that do not need to
+        know which pass matched (e.g. the MCP server, the compare view).
         """
+        return self.resolve_group(query)[0]
+
+    def resolve_group(self, query: str) -> Tuple[Optional[str], Optional[str]]:
+        """
+        Resolve `query` to (canonical group name, match method).
+        match method is one of: "exact", "alias", "word_boundary",
+        "substring", "semantic" — or (None, None) when nothing matches.
+
         精確比對優先，避免 APT1 匹配到 APT12 的 bug。
         比對順序：
           1. 完整字串相等（大小寫不分）
@@ -170,26 +182,26 @@ class RAGEngine:
         # Pass 1: 完整相等
         for name in self._cti_by_group:
             if name.upper() == q_upper:
-                return name
+                return name, "exact"
 
         # Pass 1.5: 別名比對（例："Fancy Bear" -> "APT28"）
         # Embeddings can't resolve codenames, so aliases are a structured lookup.
         alias_hit = self._alias_to_group.get(q_upper)
         if alias_hit:
-            return alias_hit
+            return alias_hit, "alias"
 
         # Pass 2: word-boundary 比對
         # 例："APT1" 不會匹配 "APT12" 因為 APT1 後面跟著數字
         for name in self._cti_by_group:
             pattern = r'(?<![A-Z0-9])' + re.escape(name.upper()) + r'(?![A-Z0-9])'
             if re.search(pattern, q_upper):
-                return name
+                return name, "word_boundary"
 
         # Pass 3: query name（For example: "lazarus" match "Lazarus Group"）
         for name in self._cti_by_group:
             pattern = r'(?<![A-Z0-9])' + re.escape(q_upper) + r'(?![A-Z0-9])'
             if re.search(pattern, name.upper()):
-                return name
+                return name, "substring"
 
         # Pass 4: semantic fallback, guarded by distance AND margin.
         #
@@ -219,17 +231,17 @@ class RAGEngine:
             and r.get("title", "") in self._cti_by_group
         ]
         if not candidates:
-            return None
+            return None, None
 
         best = candidates[0]
         runner_up = candidates[1]["score"] if len(candidates) > 1 else None
 
         if not self._close_enough(best["score"]):
-            return None
+            return None, None
         if not self._clear_winner(best["score"], runner_up):
-            return None
+            return None, None
 
-        return best.get("title", "")
+        return best.get("title", ""), "semantic"
 
     # How many raw hits to pull before filtering down to group summaries.
     # The index is ~97% MITRE technique vectors, so a narrow top_k often

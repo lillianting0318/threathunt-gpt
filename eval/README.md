@@ -5,6 +5,7 @@ Two evaluations live here. They measure different parts of ThreatHunt-GPT.
 | Eval | What it measures | Data | Runner |
 |---|---|---|---|
 | Group resolution | Does `resolve_group()` map a query to the right threat group, or to none? | `dataset.jsonl` (dev, 87), `group_test.jsonl` (test v1, 150), `group_test_v2.jsonl` (test v2, 100, sealed) | `run_eval.py`, `sweep_thresholds.py` |
+| Summary faithfulness | Does the LLM hunt summary stick to the CTI summary and techniques it was given? | one generated summary per group (24) | `run_faithfulness.py` |
 | Technique mapping | Can a model map one CTI sentence to the right ATT&CK technique? (experimental classifier, not wired into the app) | `eval_set.jsonl` (200, built from MITRE procedure examples) | `run_ttp_eval.py` |
 
 ---
@@ -74,12 +75,16 @@ The dev set said the out-of-scope false-match rate was 0%. On held-out data it w
 2. **Pass 4 word gate.** Pass 4 runs only for queries of at least `SEMANTIC_MIN_WORDS` (4) words. A shorter query that misses Passes 1–3 returns no match. A miss is safer than a confident wrong group.
 3. **Dev set extended** with 20 short unknown names and 10 separator variants. These are new queries of the same *types* as the v1 failures, not copies of them.
 
-**After:** run test v2 once, after the dev results are final.
+**After (test v2 run once, on the committed design):**
 
 | Set | Accuracy | OOS false-match rate | In-scope wrong-group rate |
 |---|---|---|---|
-| dev (87) | | | |
-| test v2 (100) | | | |
+| dev (87) | 95.4% | 0.0% | 0.0% |
+| test v2 (100) | 89.0% | **2.5%** | 0.0% |
+
+The out-of-scope false-match rate fell from 32.5% (test v1) to 2.5% (test v2). The one remaining false match is `APT → APT-C-23`, recorded below before v2 was run. All 10 misses are typos, which no pass handles yet. Accuracy is not comparable across v1 and v2 because their bucket mixes differ; the false-match rate is, since both have 40 out-of-scope queries.
+
+Limitation: v2 contains no descriptive queries, so Pass 4 never fired on it. v2 shows that short queries no longer produce confident wrong answers; it does not measure Pass 4 on descriptions. The next test set should include them. The word gate of 4 also rests on only 6 descriptive dev queries (5 would already block a correct one).
 
 ### Known failures not fixed by these changes
 
@@ -100,3 +105,69 @@ python eval/run_ttp_eval.py report                    # tables + results/quality
 ```
 
 Limitation: gpt-oss may have seen ATT&CK procedure examples during pretraining, which could inflate the LLM-only scores.
+
+---
+
+## 3. Summary faithfulness
+
+The hunt summary is the only text in a hunt written by the LLM. The model is given the group's CTI summary and its first 10 techniques (`SUMMARY_TTP_LIMIT` in `agents/answer_agent.py`). The question is whether the summary stays within that input.
+
+### Automatic check: technique IDs
+
+Every technique ID in the summary is sorted into one bucket:
+
+| Bucket | Meaning |
+|---|---|
+| `in_prompt` | the model was given it — fine |
+| `parent_of_prompt` | the parent of a sub-technique it was given (`T1114` for `T1114.001`) — a generalization, still supported |
+| `group_not_prompt` | belongs to the group, but was not in the prompt — recalled from training, not verified |
+| `not_in_group` | a real ATT&CK technique, but not this group's — unsupported |
+| `invalid` | not an ATT&CK ID at all — hallucinated |
+
+### Manual check: claims
+
+No regex can tell whether "the group targets European defense contractors" is supported. Each summary is labeled by hand in `results/faithfulness_labels.csv`:
+
+| Label | Use when |
+|---|---|
+| `faithful` | every claim is supported by the CTI summary or the given techniques |
+| `minor_issue` | supported overall, but one detail is vague, overstated, or slightly off |
+| `unsupported_claim` | at least one specific claim (a target, date, tool, motive, or technique) is in neither input |
+
+Write the reason in one line, quoting the claim. Label against the input shown in the sheet, not against outside knowledge: a true fact the model was not given is still `unsupported_claim`, because the pipeline cannot vouch for it.
+
+### Run
+
+```bash
+python -m eval.run_faithfulness generate   # one summary per group; needs GROQ_API_KEY
+python -m eval.run_faithfulness check      # automatic check + labeling sheet
+# fill label / reason in eval/results/faithfulness_labels.csv
+python -m eval.run_faithfulness report
+```
+
+Summaries are saved, so labels always refer to the text that was labeled. Re-running `check` keeps existing labels for unchanged summaries.
+
+### Results
+
+### Results
+
+| Prompt | faithful | minor_issue | unsupported_claim |
+|---|---|---|---|
+| v1: asks for "profile and motivation" | 0 | 1 | 23 |
+| v2: use only the given input; no unstated motive, sponsor, targets or tools | 1 | 9 | 14 |
+
+Technique IDs: 136/136 supported in v1 (one is the parent of a given sub-technique).
+
+**v1:** most unsupported claims (about 19 of 23) were motives. The prompt asked for "motivation", which the CTI summaries rarely state, so the model supplied one.
+
+**v2:** stated motives nearly disappeared, but unsupported detail moved elsewhere: added target sectors (6), kill-chain steps beyond the given techniques (5), aliases and tool names from memory (4, including the likely invented alias "APT-Iran-13"), and one misclassification. These cluster in groups with only one or two techniques, where the prompt still asks for 2-3 sentences of kill chain.
+
+One error the ID check cannot catch: the ALLANITE summary maps screen capture to T0859 instead of T0852. Both IDs were in the prompt, so only a human read finds it.
+
+Limits: one annotator (the author), not blind to the prompt version. Prompt v2 was written after reading the v1 failures on the same 24 groups, so the v2 numbers are optimistic. There are no further groups to hold out.
+
+### Limits
+
+- 24 summaries, one per group, labeled by one person (the author). Expect noise, and no inter-annotator agreement.
+- Temperature is 0.3, so a regenerated summary can differ. The numbers describe this saved set.
+- The ID check only sees IDs written out; a technique described in words without its ID is invisible to it.

@@ -207,10 +207,16 @@ def _generate_spl(group: str, ttps: List[Dict]) -> str:
 # ---------------------------------------------------------------------------
 # Hunt summary via Groq
 # ---------------------------------------------------------------------------
+# How many of the group's techniques are shown to the LLM. The faithfulness
+# eval (eval/run_faithfulness.py) reads this so it checks the summary against
+# exactly what the model was given.
+SUMMARY_TTP_LIMIT = 10
+
+
 def _generate_summary(group: str, cti_summary: str, ttps: List[Dict]) -> str:
     ttp_block = "\n".join(
         f"  - {t['id']} ({t['name']}): {t['description'][:120]}"
-        for t in ttps[:10]
+        for t in ttps[:SUMMARY_TTP_LIMIT]
     )
     prompt = f"""You are a senior threat intelligence analyst writing a threat hunt brief.
 
@@ -219,11 +225,11 @@ Threat Group: {group}
 CTI Summary:
 {cti_summary}
 
-MITRE ATT&CK Techniques ({len(ttps)} total, top 10):
+MITRE ATT&CK Techniques ({len(ttps)} total, top {SUMMARY_TTP_LIMIT}):
 {ttp_block}
 
 Write a concise threat hunt summary covering:
-1. Group profile and motivation (1-2 sentences)
+1. Group profile (1-2 sentences)
 2. Primary attack methods and kill chain (2-3 sentences)
 3. Top detection priorities for defenders (2-3 sentences)
 4. Recommended hunt hypothesis (1 sentence)

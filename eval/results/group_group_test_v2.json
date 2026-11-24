@@ -1,0 +1,918 @@
+{
+  "summary": {
+    "n": 100,
+    "accuracy": 0.89,
+    "false_match_rate_out_of_scope": 0.025,
+    "wrong_group_rate_in_scope": 0.0,
+    "by_method": {
+      "exact": 10,
+      "alias": 20,
+      "word_boundary": 10,
+      "normalized": 10,
+      "none": 49,
+      "substring": 1
+    }
+  },
+  "results": [
+    {
+      "id": "v2-001",
+      "kind": "exact",
+      "query": "aPt28",
+      "expected": "APT28",
+      "actual": "APT28",
+      "method": "exact",
+      "outcome": "correct"
+    },
+    {
+      "id": "v2-002",
+      "kind": "exact",
+      "query": "fin7",
+      "expected": "FIN7",
+      "actual": "FIN7",
+      "method": "exact",
+      "outcome": "correct"
+    },
+    {
+      "id": "v2-003",
+      "kind": "exact",
+      "query": "Akira",
+      "expected": "Akira",
+      "actual": "Akira",
+      "method": "exact",
+      "outcome": "correct"
+    },
+    {
+      "id": "v2-004",
+      "kind": "exact",
+      "query": "apt-c-36",
+      "expected": "APT-C-36",
+      "actual": "APT-C-36",
+      "method": "exact",
+      "outcome": "correct"
+    },
+    {
+      "id": "v2-005",
+      "kind": "exact",
+      "query": "Andariel",
+      "expected": "Andariel",
+      "actual": "Andariel",
+      "method": "exact",
+      "outcome": "correct"
+    },
+    {
+      "id": "v2-006",
+      "kind": "exact",
+      "query": "apt17",
+      "expected": "APT17",
+      "actual": "APT17",
+      "method": "exact",
+      "outcome": "correct"
+    },
+    {
+      "id": "v2-007",
+      "kind": "exact",
+      "query": "ALLANITE",
+      "expected": "ALLANITE",
+      "actual": "ALLANITE",
+      "method": "exact",
+      "outcome": "correct"
+    },
+    {
+      "id": "v2-008",
+      "kind": "exact",
+      "query": "Agrius",
+      "expected": "Agrius",
+      "actual": "Agrius",
+      "method": "exact",
+      "outcome": "correct"
+    },
+    {
+      "id": "v2-009",
+      "kind": "exact",
+      "query": "apt30",
+      "expected": "APT30",
+      "actual": "APT30",
+      "method": "exact",
+      "outcome": "correct"
+    },
+    {
+      "id": "v2-010",
+      "kind": "exact",
+      "query": "Ajax Security Team",
+      "expected": "Ajax Security Team",
+      "actual": "Ajax Security Team",
+      "method": "exact",
+      "outcome": "correct"
+    },
+    {
+      "id": "v2-011",
+      "kind": "alias",
+      "query": "Group 74",
+      "expected": "APT28",
+      "actual": "APT28",
+      "method": "alias",
+      "outcome": "correct"
+    },
+    {
+      "id": "v2-012",
+      "kind": "alias",
+      "query": "GruesomeLarch",
+      "expected": "APT28",
+      "actual": "APT28",
+      "method": "alias",
+      "outcome": "correct"
+    },
+    {
+      "id": "v2-013",
+      "kind": "alias",
+      "query": "Iron Twilight",
+      "expected": "APT28",
+      "actual": "APT28",
+      "method": "alias",
+      "outcome": "correct"
+    },
+    {
+      "id": "v2-014",
+      "kind": "alias",
+      "query": "SnakeMackerel",
+      "expected": "APT28",
+      "actual": "APT28",
+      "method": "alias",
+      "outcome": "correct"
+    },
+    {
+      "id": "v2-015",
+      "kind": "alias",
+      "query": "Swallowtail",
+      "expected": "APT28",
+      "actual": "APT28",
+      "method": "alias",
+      "outcome": "correct"
+    },
+    {
+      "id": "v2-016",
+      "kind": "alias",
+      "query": "TG-4127",
+      "expected": "APT28",
+      "actual": "APT28",
+      "method": "alias",
+      "outcome": "correct"
+    },
+    {
+      "id": "v2-017",
+      "kind": "alias",
+      "query": "Blue Kitsune",
+      "expected": "APT29",
+      "actual": "APT29",
+      "method": "alias",
+      "outcome": "correct"
+    },
+    {
+      "id": "v2-018",
+      "kind": "alias",
+      "query": "CozyDuke",
+      "expected": "APT29",
+      "actual": "APT29",
+      "method": "alias",
+      "outcome": "correct"
+    },
+    {
+      "id": "v2-019",
+      "kind": "alias",
+      "query": "Iron Hemlock",
+      "expected": "APT29",
+      "actual": "APT29",
+      "method": "alias",
+      "outcome": "correct"
+    },
+    {
+      "id": "v2-020",
+      "kind": "alias",
+      "query": "NobleBaron",
+      "expected": "APT29",
+      "actual": "APT29",
+      "method": "alias",
+      "outcome": "correct"
+    },
+    {
+      "id": "v2-021",
+      "kind": "alias",
+      "query": "SolarStorm",
+      "expected": "APT29",
+      "actual": "APT29",
+      "method": "alias",
+      "outcome": "correct"
+    },
+    {
+      "id": "v2-022",
+      "kind": "alias",
+      "query": "UNC3524",
+      "expected": "APT29",
+      "actual": "APT29",
+      "method": "alias",
+      "outcome": "correct"
+    },
+    {
+      "id": "v2-023",
+      "kind": "alias",
+      "query": "TG-0110",
+      "expected": "APT3",
+      "actual": "APT3",
+      "method": "alias",
+      "outcome": "correct"
+    },
+    {
+      "id": "v2-024",
+      "kind": "alias",
+      "query": "C0d0so0",
+      "expected": "APT19",
+      "actual": "APT19",
+      "method": "alias",
+      "outcome": "correct"
+    },
+    {
+      "id": "v2-025",
+      "kind": "alias",
+      "query": "Codoso Team",
+      "expected": "APT19",
+      "actual": "APT19",
+      "method": "alias",
+      "outcome": "correct"
+    },
+    {
+      "id": "v2-026",
+      "kind": "alias",
+      "query": "Grey Karkadann",
+      "expected": "APT-C-23",
+      "actual": "APT-C-23",
+      "method": "alias",
+      "outcome": "correct"
+    },
+    {
+      "id": "v2-027",
+      "kind": "alias",
+      "query": "Two-tailed Scorpion",
+      "expected": "APT-C-23",
+      "actual": "APT-C-23",
+      "method": "alias",
+      "outcome": "correct"
+    },
+    {
+      "id": "v2-028",
+      "kind": "alias",
+      "query": "Blind Eagle",
+      "expected": "APT-C-36",
+      "actual": "APT-C-36",
+      "method": "alias",
+      "outcome": "correct"
+    },
+    {
+      "id": "v2-029",
+      "kind": "alias",
+      "query": "TAG-144",
+      "expected": "APT-C-36",
+      "actual": "APT-C-36",
+      "method": "alias",
+      "outcome": "correct"
+    },
+    {
+      "id": "v2-030",
+      "kind": "alias",
+      "query": "Labyrinth Chollima",
+      "expected": "Lazarus Group",
+      "actual": "Lazarus Group",
+      "method": "alias",
+      "outcome": "correct"
+    },
+    {
+      "id": "v2-031",
+      "kind": "substring_trap",
+      "query": "new APT19 report",
+      "expected": "APT19",
+      "actual": "APT19",
+      "method": "word_boundary",
+      "outcome": "correct"
+    },
+    {
+      "id": "v2-032",
+      "kind": "substring_trap",
+      "query": "APT17 infrastructure",
+      "expected": "APT17",
+      "actual": "APT17",
+      "method": "word_boundary",
+      "outcome": "correct"
+    },
+    {
+      "id": "v2-033",
+      "kind": "substring_trap",
+      "query": "indicators: APT-C-23",
+      "expected": "APT-C-23",
+      "actual": "APT-C-23",
+      "method": "word_boundary",
+      "outcome": "correct"
+    },
+    {
+      "id": "v2-034",
+      "kind": "substring_trap",
+      "query": "Agrius wiper",
+      "expected": "Agrius",
+      "actual": "Agrius",
+      "method": "word_boundary",
+      "outcome": "correct"
+    },
+    {
+      "id": "v2-035",
+      "kind": "substring_trap",
+      "query": "FIN7 Carbanak",
+      "expected": "FIN7",
+      "actual": "FIN7",
+      "method": "word_boundary",
+      "outcome": "correct"
+    },
+    {
+      "id": "v2-036",
+      "kind": "substring_trap",
+      "query": "ALLANITE in the energy sector",
+      "expected": "ALLANITE",
+      "actual": "ALLANITE",
+      "method": "word_boundary",
+      "outcome": "correct"
+    },
+    {
+      "id": "v2-037",
+      "kind": "substring_trap",
+      "query": "Akira leak site",
+      "expected": "Akira",
+      "actual": "Akira",
+      "method": "word_boundary",
+      "outcome": "correct"
+    },
+    {
+      "id": "v2-038",
+      "kind": "substring_trap",
+      "query": "Andariel ransomware",
+      "expected": "Andariel",
+      "actual": "Andariel",
+      "method": "word_boundary",
+      "outcome": "correct"
+    },
+    {
+      "id": "v2-039",
+      "kind": "substring_trap",
+      "query": "APT12 timeline",
+      "expected": "APT12",
+      "actual": "APT12",
+      "method": "word_boundary",
+      "outcome": "correct"
+    },
+    {
+      "id": "v2-040",
+      "kind": "substring_trap",
+      "query": "Cobalt Group ATM attacks",
+      "expected": "Cobalt Group",
+      "actual": "Cobalt Group",
+      "method": "word_boundary",
+      "outcome": "correct"
+    },
+    {
+      "id": "v2-041",
+      "kind": "typo_or_variant",
+      "query": "APT 12",
+      "expected": "APT12",
+      "actual": "APT12",
+      "method": "normalized",
+      "outcome": "correct"
+    },
+    {
+      "id": "v2-042",
+      "kind": "typo_or_variant",
+      "query": "APT-16",
+      "expected": "APT16",
+      "actual": "APT16",
+      "method": "normalized",
+      "outcome": "correct"
+    },
+    {
+      "id": "v2-043",
+      "kind": "typo_or_variant",
+      "query": "apt_17",
+      "expected": "APT17",
+      "actual": "APT17",
+      "method": "normalized",
+      "outcome": "correct"
+    },
+    {
+      "id": "v2-044",
+      "kind": "typo_or_variant",
+      "query": "APT 18",
+      "expected": "APT18",
+      "actual": "APT18",
+      "method": "normalized",
+      "outcome": "correct"
+    },
+    {
+      "id": "v2-045",
+      "kind": "typo_or_variant",
+      "query": "Fin7.",
+      "expected": "FIN7",
+      "actual": "FIN7",
+      "method": "normalized",
+      "outcome": "correct"
+    },
+    {
+      "id": "v2-046",
+      "kind": "typo_or_variant",
+      "query": "Lazarus  Group",
+      "expected": "Lazarus Group",
+      "actual": "Lazarus Group",
+      "method": "normalized",
+      "outcome": "correct"
+    },
+    {
+      "id": "v2-047",
+      "kind": "typo_or_variant",
+      "query": "Ocean-Lotus",
+      "expected": "APT32",
+      "actual": "APT32",
+      "method": "normalized",
+      "outcome": "correct"
+    },
+    {
+      "id": "v2-048",
+      "kind": "typo_or_variant",
+      "query": "Gold_Niagara",
+      "expected": "FIN7",
+      "actual": "FIN7",
+      "method": "normalized",
+      "outcome": "correct"
+    },
+    {
+      "id": "v2-049",
+      "kind": "typo_or_variant",
+      "query": "Pawn-Storm",
+      "expected": "APT28",
+      "actual": "APT28",
+      "method": "normalized",
+      "outcome": "correct"
+    },
+    {
+      "id": "v2-050",
+      "kind": "typo_or_variant",
+      "query": "Threat-Group-0416",
+      "expected": "APT18",
+      "actual": "APT18",
+      "method": "normalized",
+      "outcome": "correct"
+    },
+    {
+      "id": "v2-051",
+      "kind": "typo_or_variant",
+      "query": "Lazarous Group",
+      "expected": "Lazarus Group",
+      "actual": null,
+      "method": null,
+      "outcome": "missed"
+    },
+    {
+      "id": "v2-052",
+      "kind": "typo_or_variant",
+      "query": "Andriel",
+      "expected": "Andariel",
+      "actual": null,
+      "method": null,
+      "outcome": "missed"
+    },
+    {
+      "id": "v2-053",
+      "kind": "typo_or_variant",
+      "query": "Agrious",
+      "expected": "Agrius",
+      "actual": null,
+      "method": null,
+      "outcome": "missed"
+    },
+    {
+      "id": "v2-054",
+      "kind": "typo_or_variant",
+      "query": "Allanit",
+      "expected": "ALLANITE",
+      "actual": null,
+      "method": null,
+      "outcome": "missed"
+    },
+    {
+      "id": "v2-055",
+      "kind": "typo_or_variant",
+      "query": "Cobolt Group",
+      "expected": "Cobalt Group",
+      "actual": null,
+      "method": null,
+      "outcome": "missed"
+    },
+    {
+      "id": "v2-056",
+      "kind": "typo_or_variant",
+      "query": "Aoqin Dragn",
+      "expected": "Aoqin Dragon",
+      "actual": null,
+      "method": null,
+      "outcome": "missed"
+    },
+    {
+      "id": "v2-057",
+      "kind": "typo_or_variant",
+      "query": "Sofacey",
+      "expected": "APT28",
+      "actual": null,
+      "method": null,
+      "outcome": "missed"
+    },
+    {
+      "id": "v2-058",
+      "kind": "typo_or_variant",
+      "query": "Nobellium",
+      "expected": "APT29",
+      "actual": null,
+      "method": null,
+      "outcome": "missed"
+    },
+    {
+      "id": "v2-059",
+      "kind": "typo_or_variant",
+      "query": "Akirra",
+      "expected": "Akira",
+      "actual": null,
+      "method": null,
+      "outcome": "missed"
+    },
+    {
+      "id": "v2-060",
+      "kind": "typo_or_variant",
+      "query": "APT 3O",
+      "expected": "APT30",
+      "actual": null,
+      "method": null,
+      "outcome": "missed"
+    },
+    {
+      "id": "v2-061",
+      "kind": "out_of_scope",
+      "query": "APT42",
+      "expected": null,
+      "actual": null,
+      "method": null,
+      "outcome": "correct"
+    },
+    {
+      "id": "v2-062",
+      "kind": "out_of_scope",
+      "query": "APT43",
+      "expected": null,
+      "actual": null,
+      "method": null,
+      "outcome": "correct"
+    },
+    {
+      "id": "v2-063",
+      "kind": "out_of_scope",
+      "query": "APT9",
+      "expected": null,
+      "actual": null,
+      "method": null,
+      "outcome": "correct"
+    },
+    {
+      "id": "v2-064",
+      "kind": "out_of_scope",
+      "query": "APT4",
+      "expected": null,
+      "actual": null,
+      "method": null,
+      "outcome": "correct"
+    },
+    {
+      "id": "v2-065",
+      "kind": "out_of_scope",
+      "query": "APT20",
+      "expected": null,
+      "actual": null,
+      "method": null,
+      "outcome": "correct"
+    },
+    {
+      "id": "v2-066",
+      "kind": "out_of_scope",
+      "query": "FIN5",
+      "expected": null,
+      "actual": null,
+      "method": null,
+      "outcome": "correct"
+    },
+    {
+      "id": "v2-067",
+      "kind": "out_of_scope",
+      "query": "FIN9",
+      "expected": null,
+      "actual": null,
+      "method": null,
+      "outcome": "correct"
+    },
+    {
+      "id": "v2-068",
+      "kind": "out_of_scope",
+      "query": "FIN13",
+      "expected": null,
+      "actual": null,
+      "method": null,
+      "outcome": "correct"
+    },
+    {
+      "id": "v2-069",
+      "kind": "out_of_scope",
+      "query": "Silence",
+      "expected": null,
+      "actual": null,
+      "method": null,
+      "outcome": "correct"
+    },
+    {
+      "id": "v2-070",
+      "kind": "out_of_scope",
+      "query": "Evil Corp",
+      "expected": null,
+      "actual": null,
+      "method": null,
+      "outcome": "correct"
+    },
+    {
+      "id": "v2-071",
+      "kind": "out_of_scope",
+      "query": "TA505",
+      "expected": null,
+      "actual": null,
+      "method": null,
+      "outcome": "correct"
+    },
+    {
+      "id": "v2-072",
+      "kind": "out_of_scope",
+      "query": "Winnti Group",
+      "expected": null,
+      "actual": null,
+      "method": null,
+      "outcome": "correct"
+    },
+    {
+      "id": "v2-073",
+      "kind": "out_of_scope",
+      "query": "BlackEnergy",
+      "expected": null,
+      "actual": null,
+      "method": null,
+      "outcome": "correct"
+    },
+    {
+      "id": "v2-074",
+      "kind": "out_of_scope",
+      "query": "Black Basta",
+      "expected": null,
+      "actual": null,
+      "method": null,
+      "outcome": "correct"
+    },
+    {
+      "id": "v2-075",
+      "kind": "out_of_scope",
+      "query": "Royal",
+      "expected": null,
+      "actual": null,
+      "method": null,
+      "outcome": "correct"
+    },
+    {
+      "id": "v2-076",
+      "kind": "out_of_scope",
+      "query": "Hive",
+      "expected": null,
+      "actual": null,
+      "method": null,
+      "outcome": "correct"
+    },
+    {
+      "id": "v2-077",
+      "kind": "out_of_scope",
+      "query": "Ryuk",
+      "expected": null,
+      "actual": null,
+      "method": null,
+      "outcome": "correct"
+    },
+    {
+      "id": "v2-078",
+      "kind": "out_of_scope",
+      "query": "QakBot",
+      "expected": null,
+      "actual": null,
+      "method": null,
+      "outcome": "correct"
+    },
+    {
+      "id": "v2-079",
+      "kind": "out_of_scope",
+      "query": "PlugX",
+      "expected": null,
+      "actual": null,
+      "method": null,
+      "outcome": "correct"
+    },
+    {
+      "id": "v2-080",
+      "kind": "out_of_scope",
+      "query": "ShadowPad",
+      "expected": null,
+      "actual": null,
+      "method": null,
+      "outcome": "correct"
+    },
+    {
+      "id": "v2-081",
+      "kind": "out_of_scope",
+      "query": "Metasploit",
+      "expected": null,
+      "actual": null,
+      "method": null,
+      "outcome": "correct"
+    },
+    {
+      "id": "v2-082",
+      "kind": "out_of_scope",
+      "query": "Nmap",
+      "expected": null,
+      "actual": null,
+      "method": null,
+      "outcome": "correct"
+    },
+    {
+      "id": "v2-083",
+      "kind": "out_of_scope",
+      "query": "Splunk",
+      "expected": null,
+      "actual": null,
+      "method": null,
+      "outcome": "correct"
+    },
+    {
+      "id": "v2-084",
+      "kind": "out_of_scope",
+      "query": "Amazon",
+      "expected": null,
+      "actual": null,
+      "method": null,
+      "outcome": "correct"
+    },
+    {
+      "id": "v2-085",
+      "kind": "out_of_scope",
+      "query": "phishing kit",
+      "expected": null,
+      "actual": null,
+      "method": null,
+      "outcome": "correct"
+    },
+    {
+      "id": "v2-086",
+      "kind": "out_of_scope",
+      "query": "zero-day",
+      "expected": null,
+      "actual": null,
+      "method": null,
+      "outcome": "correct"
+    },
+    {
+      "id": "v2-087",
+      "kind": "out_of_scope",
+      "query": "botnet",
+      "expected": null,
+      "actual": null,
+      "method": null,
+      "outcome": "correct"
+    },
+    {
+      "id": "v2-088",
+      "kind": "out_of_scope",
+      "query": "insider threat",
+      "expected": null,
+      "actual": null,
+      "method": null,
+      "outcome": "correct"
+    },
+    {
+      "id": "v2-089",
+      "kind": "out_of_scope",
+      "query": "cyber crime gang",
+      "expected": null,
+      "actual": null,
+      "method": null,
+      "outcome": "correct"
+    },
+    {
+      "id": "v2-090",
+      "kind": "out_of_scope",
+      "query": "threat actor list",
+      "expected": null,
+      "actual": null,
+      "method": null,
+      "outcome": "correct"
+    },
+    {
+      "id": "v2-091",
+      "kind": "out_of_scope",
+      "query": "APT",
+      "expected": null,
+      "actual": "APT-C-23",
+      "method": "substring",
+      "outcome": "wrong"
+    },
+    {
+      "id": "v2-092",
+      "kind": "out_of_scope",
+      "query": "FIN",
+      "expected": null,
+      "actual": null,
+      "method": null,
+      "outcome": "correct"
+    },
+    {
+      "id": "v2-093",
+      "kind": "out_of_scope",
+      "query": "hackers from Russia",
+      "expected": null,
+      "actual": null,
+      "method": null,
+      "outcome": "correct"
+    },
+    {
+      "id": "v2-094",
+      "kind": "out_of_scope",
+      "query": "zxcvbnm",
+      "expected": null,
+      "actual": null,
+      "method": null,
+      "outcome": "correct"
+    },
+    {
+      "id": "v2-095",
+      "kind": "out_of_scope",
+      "query": "test",
+      "expected": null,
+      "actual": null,
+      "method": null,
+      "outcome": "correct"
+    },
+    {
+      "id": "v2-096",
+      "kind": "out_of_scope",
+      "query": "???",
+      "expected": null,
+      "actual": null,
+      "method": null,
+      "outcome": "correct"
+    },
+    {
+      "id": "v2-097",
+      "kind": "out_of_scope",
+      "query": "lorem ipsum",
+      "expected": null,
+      "actual": null,
+      "method": null,
+      "outcome": "correct"
+    },
+    {
+      "id": "v2-098",
+      "kind": "out_of_scope",
+      "query": "pizza near me",
+      "expected": null,
+      "actual": null,
+      "method": null,
+      "outcome": "correct"
+    },
+    {
+      "id": "v2-099",
+      "kind": "out_of_scope",
+      "query": "stock price of NVDA",
+      "expected": null,
+      "actual": null,
+      "method": null,
+      "outcome": "correct"
+    },
+    {
+      "id": "v2-100",
+      "kind": "out_of_scope",
+      "query": "Cobalt blue paint",
+      "expected": null,
+      "actual": null,
+      "method": null,
+      "outcome": "correct"
+    }
+  ]
+}

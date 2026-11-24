@@ -3,9 +3,11 @@ rag_engine.py — ThreatHunt-GPT RAG Core
 Handles FAISS vector search over MITRE ATT&CK techniques + CTI metadata.
 """
 
+import hashlib
 import json
 import os
 import sys
+import time
 import numpy as np
 import faiss
 from sentence_transformers import SentenceTransformer
@@ -97,6 +99,37 @@ ICS_TECHNIQUES: Dict[str, Dict] = {
     "T0891": {"name": "Hardcoded Credentials", "description": "Adversaries may use hardcoded credentials present in the software or firmware to gain access.", "domain": "ics-attack"},
 }
 
+# ── Enriched-index cache ──────────────────────────────────────────────
+# enrich_index_with_mitre() embeds ~900 technique descriptions. That result
+# only changes when its inputs change, so it is cached on disk and reused.
+#
+# Bump this when the enrichment logic itself changes (e.g. a new text
+# format for technique entries) — code changes are not part of the hash.
+INDEX_CACHE_VERSION = "1"
+_DEFAULT_CACHE_DIR = os.path.join(_HERE, "cache")
+
+
+def compute_index_cache_key(input_paths: List[str], model_name: str) -> str:
+    """Hash everything the enriched index depends on.
+
+    - every input file's bytes (base index, CTI metadata, MITRE data):
+      a new ATT&CK release changes combined_mitre.json, so the key changes
+    - the embedding model name: vectors from different models live in
+      different spaces, so a cache built with model A is wrong for model B
+    - ICS_TECHNIQUES, which is data that lives in this file
+    - INDEX_CACHE_VERSION, for changes to the enrichment code itself
+    """
+    h = hashlib.sha256()
+    h.update(f"v={INDEX_CACHE_VERSION}\nmodel={model_name}\n".encode())
+    for path in input_paths:
+        h.update(os.path.basename(path).encode())
+        with open(path, "rb") as f:
+            for chunk in iter(lambda: f.read(1 << 20), b""):
+                h.update(chunk)
+    h.update(json.dumps(ICS_TECHNIQUES, sort_keys=True).encode())
+    return h.hexdigest()
+
+
 class RAGEngine:
     def __init__(
         self,
@@ -104,7 +137,9 @@ class RAGEngine:
         metadata_path: Optional[str] = None,
         mitre_path:    Optional[str] = None,
         aliases_path:  Optional[str] = None,
+        cache_dir:     Optional[str] = None,
     ):
+        t_start = time.perf_counter()
         faiss_path    = faiss_path    or os.path.join(_HERE, "combined_index.faiss")
         metadata_path = metadata_path or os.path.join(_HERE, "combined_metadata.json")
         mitre_path    = mitre_path    or os.path.join(_HERE, "combined_mitre.json")
@@ -144,8 +179,64 @@ class RAGEngine:
             }
             print(f"Loaded {len(self._alias_to_group)} group aliases", file=sys.stderr)
 
-        added = self.enrich_index_with_mitre()
-        print(f"Enriched index with {added} MITRE technique entries", file=sys.stderr)
+        # Enriched index: reuse the on-disk cache when its key still matches,
+        # otherwise rebuild and save. _cti_by_group above is built from the
+        # base metadata only, so technique entries never leak into it.
+        cache_dir = cache_dir or os.environ.get("TH_CACHE_DIR", _DEFAULT_CACHE_DIR)
+        key = compute_index_cache_key([faiss_path, metadata_path, mitre_path], EMBED_MODEL)
+        if self._load_index_cache(cache_dir, key):
+            source = "cache"
+        else:
+            added = self.enrich_index_with_mitre()
+            print(f"Enriched index with {added} MITRE technique entries", file=sys.stderr)
+            self._save_index_cache(cache_dir, key)
+            source = "rebuilt"
+
+        elapsed = time.perf_counter() - t_start
+        print(f"RAGEngine ready in {elapsed:.1f}s (index: {source})", file=sys.stderr)
+
+    # ------------------------------------------------------------------
+    # Enriched-index cache
+    # ------------------------------------------------------------------
+    _CACHE_INDEX = "enriched.faiss"
+    _CACHE_META = "enriched_metadata.json"
+    _CACHE_KEY = "cache_key.txt"
+
+    def _load_index_cache(self, cache_dir: str, key: str) -> bool:
+        """Swap in the cached index + metadata if the key matches. Never raises."""
+        key_path = os.path.join(cache_dir, self._CACHE_KEY)
+        try:
+            with open(key_path) as f:
+                if f.read().strip() != key:
+                    return False
+            index = faiss.read_index(os.path.join(cache_dir, self._CACHE_INDEX))
+            with open(os.path.join(cache_dir, self._CACHE_META)) as f:
+                metadata = json.load(f)
+        except (OSError, ValueError, RuntimeError):
+            # missing, unreadable or corrupt cache -> just rebuild
+            return False
+        if index is None or index.ntotal != len(metadata):
+            return False
+        self.index, self.metadata = index, metadata
+        return True
+
+    def _save_index_cache(self, cache_dir: str, key: str) -> None:
+        """Write the cache; the key file goes last, so a crash mid-write leaves
+        a stale key that simply fails to match next time. Never raises —
+        a read-only filesystem should cost startup time, not the app."""
+        try:
+            os.makedirs(cache_dir, exist_ok=True)
+            faiss.write_index(self.index, os.path.join(cache_dir, self._CACHE_INDEX))
+            tmp_meta = os.path.join(cache_dir, self._CACHE_META + ".tmp")
+            with open(tmp_meta, "w") as f:
+                json.dump(self.metadata, f)
+            os.replace(tmp_meta, os.path.join(cache_dir, self._CACHE_META))
+            tmp_key = os.path.join(cache_dir, self._CACHE_KEY + ".tmp")
+            with open(tmp_key, "w") as f:
+                f.write(key)
+            os.replace(tmp_key, os.path.join(cache_dir, self._CACHE_KEY))
+        except (OSError, RuntimeError) as e:
+            print(f"warning: could not write index cache to {cache_dir}: {e}", file=sys.stderr)
 
     # ------------------------------------------------------------------
     # Group lookups

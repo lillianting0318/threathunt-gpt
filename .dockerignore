@@ -11,3 +11,6 @@ venv
 .DS_Store
 *.md
 requirements-dev.txt
+
+# Local index cache; the container builds its own
+cache/

@@ -229,10 +229,15 @@ MITRE ATT&CK Techniques ({len(ttps)} total, top {SUMMARY_TTP_LIMIT}):
 {ttp_block}
 
 Write a concise threat hunt summary covering:
-1. Group profile (1-2 sentences)
+1. Group profile and motivation (1-2 sentences)
 2. Primary attack methods and kill chain (2-3 sentences)
 3. Top detection priorities for defenders (2-3 sentences)
 4. Recommended hunt hypothesis (1 sentence)
+
+Use only facts stated in the CTI Summary and the techniques listed above.
+Do not add a motive, sponsor, target sector, alias, tool, or malware name
+unless it appears in that input. If something is not stated, write
+"not stated in the source" or leave it out.
 
 Be specific, technical, and actionable. Plain paragraphs only, no bullet points."""
 

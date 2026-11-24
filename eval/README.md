@@ -149,13 +149,12 @@ Summaries are saved, so labels always refer to the text that was labeled. Re-run
 
 ### Results
 
-### Results
 
 | Prompt | faithful | minor_issue | unsupported_claim |
 |---|---|---|---|
 | v1: asks for "profile and motivation" | 0 | 1 | 23 |
-| v2: use only the given input; no unstated motive, sponsor, targets or tools | 1 | 9 | 14 |
-
+| v2: drops "and motivation" from the request | 1 | 9 | 14 |
+| v3: v1 prompt plus grounding rules (use only the given input; no unstated motive, sponsor, target sector, alias, tool or malware) | 10 | 7 | 7 |
 Technique IDs: 136/136 supported in v1 (one is the parent of a given sub-technique).
 
 **v1:** most unsupported claims (about 19 of 23) were motives. The prompt asked for "motivation", which the CTI summaries rarely state, so the model supplied one.
@@ -163,6 +162,10 @@ Technique IDs: 136/136 supported in v1 (one is the parent of a given sub-techniq
 **v2:** stated motives nearly disappeared, but unsupported detail moved elsewhere: added target sectors (6), kill-chain steps beyond the given techniques (5), aliases and tool names from memory (4, including the likely invented alias "APT-Iran-13"), and one misclassification. These cluster in groups with only one or two techniques, where the prompt still asks for 2-3 sentences of kill chain.
 
 One error the ID check cannot catch: the ALLANITE summary maps screen capture to T0859 instead of T0852. Both IDs were in the prompt, so only a human read finds it.
+
+**v3:** v1 and v3 differ only in the grounding rules. The rules removed almost all non-motive fabrication seen in v1 and v2: added target sectors, aliases, tool names and extra kill-chain steps. Most remaining unsupported claims are the motive sentence, which the v3 prompt still asks for while also forbidding unstated motives; the model resolves the conflict with hedged guesses ("their motivation appears to be...").
+
+**Labeling caveat:** in v3, a motive that follows from the activity named in the input (e.g. "cyber espionage" → intelligence collection) was sometimes accepted as faithful (APT28, APT29, Ajax Security Team, Cobalt Group). v1 and v2 were labeled more strictly. Under the v1/v2 reading, v3 would be 6 / 6 / 12. The application was also not fully consistent within v3 (APT1 and APT29 make similar claims but received different labels).
 
 Limits: one annotator (the author), not blind to the prompt version. Prompt v2 was written after reading the v1 failures on the same 24 groups, so the v2 numbers are optimistic. There are no further groups to hold out.
 

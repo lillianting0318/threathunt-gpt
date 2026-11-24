@@ -29,3 +29,6 @@ package-lock.json
 
 # pytest
 .pytest_cache/
+
+# Eval LLM response cache
+eval/cache.jsonl

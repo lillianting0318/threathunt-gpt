@@ -5,7 +5,7 @@
 ![Python](https://img.shields.io/badge/Python-3.11-3776AB?style=flat&logo=python&logoColor=white)
 ![Streamlit](https://img.shields.io/badge/Streamlit-1.55-FF4B4B?style=flat&logo=streamlit&logoColor=white)
 ![MITRE ATT&CK](https://img.shields.io/badge/MITRE_ATT%26CK®-Enterprise_+_ICS-red?style=flat)
-![LLM](https://img.shields.io/badge/LLM-Groq_llama--3.3--70b-F55036?style=flat)
+![LLM](https://img.shields.io/badge/LLM-Groq_gpt--oss--120b-F55036?style=flat)
 
 ---
 
@@ -25,6 +25,7 @@
 - [OpenClaw / Multi-Agent Integration](#openclaw--multi-agent-integration)
 - [Project Structure](#project-structure)
 - [Supported Threat Groups](#supported-threat-groups)
+- [Evaluation](#evaluation)
 
 ---
 
@@ -35,7 +36,7 @@ reports with MITRE ATT&CK techniques, then translating findings into detection
 rules for their SIEM. During my internship at a managed detection and response
 company, I saw this workflow firsthand — it was slow, repetitive, and error-prone.
 ThreatHunt-GPT automates this pipeline end-to-end: from APT group query to
-deployable YARA, KQL, and SPL rules, using a 3-agent RAG architecture backed
+template-based YARA, KQL, and SPL hunt starting points, using a 3-agent RAG architecture backed
 by 823 MITRE ATT&CK techniques. Built to explore **AI-augmented threat
 intelligence** and **LLM integration in real SOC workflows**.
 
@@ -52,10 +53,10 @@ ThreatHunt-GPT is a cybersecurity threat intelligence platform that combines RAG
 | Feature | Description |
 |---|---|
 | **Threat Group Query** | Enter any APT name to retrieve CTI summaries and mapped MITRE TTPs |
-| **YARA Rule Generation** | Auto-generate deployable YARA detection rules by tactic category |
+| **YARA Rule Generation** | Template-based YARA hunt rules by tactic category |
 | **KQL Queries** | Ready-to-use Microsoft Sentinel / Defender for Endpoint hunting queries |
 | **SPL Queries** | Splunk Enterprise Security hunting queries |
-| **AI Hunt Summary** | Groq `llama-3.3-70b` generates structured threat assessments |
+| **AI Hunt Summary** | Groq `gpt-oss-120b` generates structured threat assessments |
 | **Multi-Group Comparison** | Side-by-side TTP overlap analysis across multiple APT groups |
 | **Log Triage Agent** | Analyze Windows Event Logs and produce threat-level decision reports |
 
@@ -103,7 +104,7 @@ User Query
 [Agent 2 — TTP Agent]      Maps group to MITRE technique IDs
     │                      Enriches each TTP with full name + description from ATT&CK
     ▼
-[Agent 3 — Answer Agent]   Calls Groq llama-3.3-70b for threat assessment
+[Agent 3 — Answer Agent]   Calls Groq gpt-oss-120b for for threat assessment
     │                      Generates YARA rules, KQL queries, SPL queries
     ▼
 Output: CTI Summary · TTP Matrix · YARA · KQL · SPL
@@ -499,6 +500,33 @@ To add more groups, see [Extending CTI Data](#extending-cti-data).
 | `numpy` | Vector operations |
 
 ---
+
+## Evaluation
+
+I evaluated a CTI-sentence → MITRE ATT&CK technique classifier on 200 procedure
+examples labeled by MITRE, comparing retrieval-only, LLM-only, and RAG setups
+(gpt-oss-20b / 120b via Groq). This classifier lives in `eval/` and is not yet
+wired into the app, which resolves techniques from the threat-group name.
+
+| Setup | Exact accuracy | Hallucinated technique IDs |
+|---|---|---|
+| FAISS retrieval only | 30.0% | 0.0% |
+| LLM only (gpt-oss-20b) | 38.0% | 5.5% |
+| LLM only (gpt-oss-120b) | 48.5% | 3.0% |
+| RAG (gpt-oss-20b) | 56.5% | 0.0% |
+| RAG (gpt-oss-120b) | 57.0% | 0.0% |
+
+**What I learned**
+- Retrieval removed hallucinated IDs entirely, because the model can only pick from retrieved candidates.
+- Once retrieval was in place, the 20B model matched the 120B model (difference within the ±6.9% confidence interval).
+- 67% of the remaining errors were retrieval misses: the correct technique was not in the top-10 candidates (recall@10 = 70.5%). The bottleneck is retrieval, not the model.
+- A confidence-based 20B → 120B cascade added no value here, because the smaller model was already as accurate.
+
+![Quality vs cost](eval/results/quality_cost.png)
+
+**Limitations:** gpt-oss may have seen ATT&CK procedure examples during pretraining, which could inflate LLM-only scores. Costs use Groq list prices at the time of the run.
+
+Full results: [`eval/results/summary.md`](eval/results/summary.md) · Reproduce: `python eval/build_eval_set.py && python eval/run_eval.py run && python eval/run_eval.py report`
 
 ## Known Limitations
 

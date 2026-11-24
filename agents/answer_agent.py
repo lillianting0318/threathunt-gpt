@@ -1,25 +1,27 @@
 """
 agents/answer_agent.py — Answer / Generation Agent
-使用 Groq API (llama-3.3-70b) 生成威脅分析摘要
+Using Groq API generates threat intelligence summaries (model controlled by TH_LLM_MODEL, defaulting to openai/gpt-oss-120b)
 
-設定：
+Set your Groq API key in your shell environment:
   export GROQ_API_KEY="gsk_xxxxxxxxxxxx"
-  或在專案根目錄建立 .env 檔案：
+  or in a .env file in the project root:
   GROQ_API_KEY=gsk_xxxxxxxxxxxx
 
-申請免費 key：https://console.groq.com
+apply free key: https://console.groq.com
 """
 
 import os
 import re
 from typing import Dict, Any, List
 
-# ── 自動載入 .env ──────────────────────────────────────
+# ── auto-load .env ──────────────────────────────────────
 try:
     from dotenv import load_dotenv
     load_dotenv()
 except ImportError:
     pass
+# ── LLM model (override with TH_LLM_MODEL in .env) ────
+LLM_MODEL = os.environ.get("TH_LLM_MODEL", "openai/gpt-oss-120b")
 
 # ── Groq client（lazy init）───────────────────────────
 _groq_client = None
@@ -39,7 +41,7 @@ def _get_groq_client():
 
 
 # ---------------------------------------------------------------------------
-# Groq LLM 呼叫
+# Call Groq LLM
 # ---------------------------------------------------------------------------
 def _call_llm(prompt: str) -> str:
     client = _get_groq_client()
@@ -59,7 +61,7 @@ def _call_llm(prompt: str) -> str:
 
     try:
         response = client.chat.completions.create(
-            model="openai/gpt-oss-120b",
+            model=LLM_MODEL,
             messages=[
                 {
                     "role": "system",

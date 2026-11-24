@@ -32,3 +32,6 @@ package-lock.json
 
 # Eval LLM response cache
 eval/cache.jsonl
+
+# Enriched FAISS index cache (rebuilt automatically)
+cache/

@@ -14,6 +14,7 @@
 - [Motivation](#motivation)
 - [Author](#author)
 - [Overview](#overview)
+- [Evaluation](#evaluation)
 - [Architecture](#architecture)
 - [Quick Start](#quick-start)
 - [Groq API Key Setup](#groq-api-key-setup)
@@ -25,7 +26,7 @@
 - [OpenClaw / Multi-Agent Integration](#openclaw--multi-agent-integration)
 - [Project Structure](#project-structure)
 - [Supported Threat Groups](#supported-threat-groups)
-- [Evaluation](#evaluation)
+
 
 ---
 
@@ -59,6 +60,35 @@ ThreatHunt-GPT is a cybersecurity threat intelligence platform that combines RAG
 | **AI Hunt Summary** | Groq `gpt-oss-120b` generates structured threat assessments |
 | **Multi-Group Comparison** | Side-by-side TTP overlap analysis across multiple APT groups |
 | **Log Triage Agent** | Analyze Windows Event Logs and produce threat-level decision reports |
+
+---
+
+## Evaluation
+
+I evaluated a CTI-sentence → MITRE ATT&CK technique classifier on 200 procedure
+examples labeled by MITRE, comparing retrieval-only, LLM-only, and RAG setups
+(gpt-oss-20b / 120b via Groq). This classifier lives in `eval/` and is not yet
+wired into the app, which resolves techniques from the threat-group name.
+
+| Setup | Exact accuracy | Hallucinated technique IDs |
+|---|---|---|
+| FAISS retrieval only | 30.0% | 0.0% |
+| LLM only (gpt-oss-20b) | 38.0% | 5.5% |
+| LLM only (gpt-oss-120b) | 48.5% | 3.0% |
+| RAG (gpt-oss-20b) | 56.5% | 0.0% |
+| RAG (gpt-oss-120b) | 57.0% | 0.0% |
+
+**What I learned**
+- Retrieval removed hallucinated IDs entirely, because the model can only pick from retrieved candidates.
+- Once retrieval was in place, the 20B model matched the 120B model (difference within the ±6.9% confidence interval).
+- 67% of the remaining errors were retrieval misses: the correct technique was not in the top-10 candidates (recall@10 = 70.5%). The bottleneck is retrieval, not the model.
+- A confidence-based 20B → 120B cascade added no value here, because the smaller model was already as accurate.
+
+![Quality vs cost](eval/results/quality_cost.png)
+
+**Limitations:** gpt-oss may have seen ATT&CK procedure examples during pretraining, which could inflate LLM-only scores. Costs use Groq list prices at the time of the run.
+
+Full results: [`eval/results/summary.md`](eval/results/summary.md) · Reproduce: `python eval/build_eval_set.py && python eval/run_eval.py run && python eval/run_eval.py report`
 
 ---
 
@@ -500,33 +530,6 @@ To add more groups, see [Extending CTI Data](#extending-cti-data).
 | `numpy` | Vector operations |
 
 ---
-
-## Evaluation
-
-I evaluated a CTI-sentence → MITRE ATT&CK technique classifier on 200 procedure
-examples labeled by MITRE, comparing retrieval-only, LLM-only, and RAG setups
-(gpt-oss-20b / 120b via Groq). This classifier lives in `eval/` and is not yet
-wired into the app, which resolves techniques from the threat-group name.
-
-| Setup | Exact accuracy | Hallucinated technique IDs |
-|---|---|---|
-| FAISS retrieval only | 30.0% | 0.0% |
-| LLM only (gpt-oss-20b) | 38.0% | 5.5% |
-| LLM only (gpt-oss-120b) | 48.5% | 3.0% |
-| RAG (gpt-oss-20b) | 56.5% | 0.0% |
-| RAG (gpt-oss-120b) | 57.0% | 0.0% |
-
-**What I learned**
-- Retrieval removed hallucinated IDs entirely, because the model can only pick from retrieved candidates.
-- Once retrieval was in place, the 20B model matched the 120B model (difference within the ±6.9% confidence interval).
-- 67% of the remaining errors were retrieval misses: the correct technique was not in the top-10 candidates (recall@10 = 70.5%). The bottleneck is retrieval, not the model.
-- A confidence-based 20B → 120B cascade added no value here, because the smaller model was already as accurate.
-
-![Quality vs cost](eval/results/quality_cost.png)
-
-**Limitations:** gpt-oss may have seen ATT&CK procedure examples during pretraining, which could inflate LLM-only scores. Costs use Groq list prices at the time of the run.
-
-Full results: [`eval/results/summary.md`](eval/results/summary.md) · Reproduce: `python eval/build_eval_set.py && python eval/run_eval.py run && python eval/run_eval.py report`
 
 ## Known Limitations
 

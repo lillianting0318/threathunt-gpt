@@ -1,0 +1,150 @@
+{"id": "t-001", "query": "apt1", "expected": "APT1", "kind": "exact"}
+{"id": "t-002", "query": "Apt12", "expected": "APT12", "kind": "exact"}
+{"id": "t-003", "query": "apt16", "expected": "APT16", "kind": "exact"}
+{"id": "t-004", "query": "Apt17", "expected": "APT17", "kind": "exact"}
+{"id": "t-005", "query": "apt18", "expected": "APT18", "kind": "exact"}
+{"id": "t-006", "query": "apt19", "expected": "APT19", "kind": "exact"}
+{"id": "t-007", "query": "apt28", "expected": "APT28", "kind": "exact"}
+{"id": "t-008", "query": "Apt29", "expected": "APT29", "kind": "exact"}
+{"id": "t-009", "query": "apt3", "expected": "APT3", "kind": "exact"}
+{"id": "t-010", "query": "apt30", "expected": "APT30", "kind": "exact"}
+{"id": "t-011", "query": "apt32", "expected": "APT32", "kind": "exact"}
+{"id": "t-012", "query": "apt33", "expected": "APT33", "kind": "exact"}
+{"id": "t-013", "query": "apt-c-23", "expected": "APT-C-23", "kind": "exact"}
+{"id": "t-014", "query": "Apt-C-36", "expected": "APT-C-36", "kind": "exact"}
+{"id": "t-015", "query": "Agrius", "expected": "Agrius", "kind": "exact"}
+{"id": "t-016", "query": "AGRIUS", "expected": "Agrius", "kind": "exact"}
+{"id": "t-017", "query": "Ajax Security Team", "expected": "Ajax Security Team", "kind": "exact"}
+{"id": "t-018", "query": "AKIRA", "expected": "Akira", "kind": "exact"}
+{"id": "t-019", "query": "Andariel", "expected": "Andariel", "kind": "exact"}
+{"id": "t-020", "query": "ANDARIEL", "expected": "Andariel", "kind": "exact"}
+{"id": "t-021", "query": "allanite", "expected": "ALLANITE", "kind": "exact"}
+{"id": "t-022", "query": "AOQIN DRAGON", "expected": "Aoqin Dragon", "kind": "exact"}
+{"id": "t-023", "query": "Cobalt Group", "expected": "Cobalt Group", "kind": "exact"}
+{"id": "t-024", "query": "COBALT GROUP", "expected": "Cobalt Group", "kind": "exact"}
+{"id": "t-025", "query": "fin7", "expected": "FIN7", "kind": "exact"}
+{"id": "t-026", "query": "lazarus group", "expected": "Lazarus Group", "kind": "exact"}
+{"id": "t-027", "query": "LAZARUS GROUP", "expected": "Lazarus Group", "kind": "exact"}
+{"id": "t-028", "query": "ADMIN@338", "expected": "admin@338", "kind": "exact"}
+{"id": "t-029", "query": "  APT28  ", "expected": "APT28", "kind": "exact"}
+{"id": "t-030", "query": "\tFIN7\n", "expected": "FIN7", "kind": "exact"}
+{"id": "t-031", "query": "Sofacy", "expected": "APT28", "kind": "alias"}
+{"id": "t-032", "query": "Sednit", "expected": "APT28", "kind": "alias"}
+{"id": "t-033", "query": "Pawn Storm", "expected": "APT28", "kind": "alias"}
+{"id": "t-034", "query": "Strontium", "expected": "APT28", "kind": "alias"}
+{"id": "t-035", "query": "Tsar Team", "expected": "APT28", "kind": "alias"}
+{"id": "t-036", "query": "The Dukes", "expected": "APT29", "kind": "alias"}
+{"id": "t-037", "query": "Nobelium", "expected": "APT29", "kind": "alias"}
+{"id": "t-038", "query": "YTTRIUM", "expected": "APT29", "kind": "alias"}
+{"id": "t-039", "query": "Dark Halo", "expected": "APT29", "kind": "alias"}
+{"id": "t-040", "query": "UNC2452", "expected": "APT29", "kind": "alias"}
+{"id": "t-041", "query": "Comment Panda", "expected": "APT1", "kind": "alias"}
+{"id": "t-042", "query": "Comment Group", "expected": "APT1", "kind": "alias"}
+{"id": "t-043", "query": "Gothic Panda", "expected": "APT3", "kind": "alias"}
+{"id": "t-044", "query": "UPS Team", "expected": "APT3", "kind": "alias"}
+{"id": "t-045", "query": "Deputy Dog", "expected": "APT17", "kind": "alias"}
+{"id": "t-046", "query": "Dynamite Panda", "expected": "APT18", "kind": "alias"}
+{"id": "t-047", "query": "Codoso", "expected": "APT19", "kind": "alias"}
+{"id": "t-048", "query": "Sunshop Group", "expected": "APT19", "kind": "alias"}
+{"id": "t-049", "query": "IXESHE", "expected": "APT12", "kind": "alias"}
+{"id": "t-050", "query": "DynCalc", "expected": "APT12", "kind": "alias"}
+{"id": "t-051", "query": "SeaLotus", "expected": "APT32", "kind": "alias"}
+{"id": "t-052", "query": "APT-C-00", "expected": "APT32", "kind": "alias"}
+{"id": "t-053", "query": "Bismuth", "expected": "APT32", "kind": "alias"}
+{"id": "t-054", "query": "Canvas Cyclone", "expected": "APT32", "kind": "alias"}
+{"id": "t-055", "query": "Holmium", "expected": "APT33", "kind": "alias"}
+{"id": "t-056", "query": "Pink Sandstorm", "expected": "Agrius", "kind": "alias"}
+{"id": "t-057", "query": "Agonizing Serpens", "expected": "Agrius", "kind": "alias"}
+{"id": "t-058", "query": "BlackShadow", "expected": "Agrius", "kind": "alias"}
+{"id": "t-059", "query": "Flying Kitten", "expected": "Ajax Security Team", "kind": "alias"}
+{"id": "t-060", "query": "Gold Sahara", "expected": "Akira", "kind": "alias"}
+{"id": "t-061", "query": "Punk Spider", "expected": "Akira", "kind": "alias"}
+{"id": "t-062", "query": "Plutonium", "expected": "Andariel", "kind": "alias"}
+{"id": "t-063", "query": "Silent Chollima", "expected": "Andariel", "kind": "alias"}
+{"id": "t-064", "query": "Cobalt Gang", "expected": "Cobalt Group", "kind": "alias"}
+{"id": "t-065", "query": "Gold Kingswood", "expected": "Cobalt Group", "kind": "alias"}
+{"id": "t-066", "query": "Gold Niagara", "expected": "FIN7", "kind": "alias"}
+{"id": "t-067", "query": "ITG14", "expected": "FIN7", "kind": "alias"}
+{"id": "t-068", "query": "Diamond Sleet", "expected": "Lazarus Group", "kind": "alias"}
+{"id": "t-069", "query": "ZINC", "expected": "Lazarus Group", "kind": "alias"}
+{"id": "t-070", "query": "Arid Viper", "expected": "APT-C-23", "kind": "alias"}
+{"id": "t-071", "query": "APT1 indicators", "expected": "APT1", "kind": "substring_trap"}
+{"id": "t-072", "query": "indicators for APT12", "expected": "APT12", "kind": "substring_trap"}
+{"id": "t-073", "query": "hunt for APT16 activity", "expected": "APT16", "kind": "substring_trap"}
+{"id": "t-074", "query": "APT17's malware", "expected": "APT17", "kind": "substring_trap"}
+{"id": "t-075", "query": "is APT18 still active?", "expected": "APT18", "kind": "substring_trap"}
+{"id": "t-076", "query": "APT19 phishing campaign", "expected": "APT19", "kind": "substring_trap"}
+{"id": "t-077", "query": "report on APT3", "expected": "APT3", "kind": "substring_trap"}
+{"id": "t-078", "query": "APT30 targets in Southeast Asia", "expected": "APT30", "kind": "substring_trap"}
+{"id": "t-079", "query": "APT32 in Vietnam", "expected": "APT32", "kind": "substring_trap"}
+{"id": "t-080", "query": "what does APT33 target?", "expected": "APT33", "kind": "substring_trap"}
+{"id": "t-081", "query": "APT-C-23 mobile malware", "expected": "APT-C-23", "kind": "substring_trap"}
+{"id": "t-082", "query": "APT-C-36 phishing in Colombia", "expected": "APT-C-36", "kind": "substring_trap"}
+{"id": "t-083", "query": "FIN7 TTPs", "expected": "FIN7", "kind": "substring_trap"}
+{"id": "t-084", "query": "techniques used by Andariel", "expected": "Andariel", "kind": "substring_trap"}
+{"id": "t-085", "query": "Akira ransomware", "expected": "Akira", "kind": "substring_trap"}
+{"id": "t-086", "query": "detections for Agrius", "expected": "Agrius", "kind": "substring_trap"}
+{"id": "t-087", "query": "timeline of Cobalt Group attacks", "expected": "Cobalt Group", "kind": "substring_trap"}
+{"id": "t-088", "query": "ALLANITE ICS activity", "expected": "ALLANITE", "kind": "substring_trap"}
+{"id": "t-089", "query": "admin@338 targets", "expected": "admin@338", "kind": "substring_trap"}
+{"id": "t-090", "query": "Aoqin Dragon espionage", "expected": "Aoqin Dragon", "kind": "substring_trap"}
+{"id": "t-091", "query": "APT 28", "expected": "APT28", "kind": "typo_or_variant"}
+{"id": "t-092", "query": "APT-29", "expected": "APT29", "kind": "typo_or_variant"}
+{"id": "t-093", "query": "apt_33", "expected": "APT33", "kind": "typo_or_variant"}
+{"id": "t-094", "query": "Fin 7", "expected": "FIN7", "kind": "typo_or_variant"}
+{"id": "t-095", "query": "Lazerus Group", "expected": "Lazarus Group", "kind": "typo_or_variant"}
+{"id": "t-096", "query": "Lazarus Grp", "expected": "Lazarus Group", "kind": "typo_or_variant"}
+{"id": "t-097", "query": "Andarial", "expected": "Andariel", "kind": "typo_or_variant"}
+{"id": "t-098", "query": "Akria", "expected": "Akira", "kind": "typo_or_variant"}
+{"id": "t-099", "query": "Agrios", "expected": "Agrius", "kind": "typo_or_variant"}
+{"id": "t-100", "query": "Aoquin Dragon", "expected": "Aoqin Dragon", "kind": "typo_or_variant"}
+{"id": "t-101", "query": "Cobalt Grp", "expected": "Cobalt Group", "kind": "typo_or_variant"}
+{"id": "t-102", "query": "Fancy Bare", "expected": "APT28", "kind": "typo_or_variant"}
+{"id": "t-103", "query": "Cozy Bera", "expected": "APT29", "kind": "typo_or_variant"}
+{"id": "t-104", "query": "Ocean Lotus", "expected": "APT32", "kind": "typo_or_variant"}
+{"id": "t-105", "query": "Hidden-Cobra", "expected": "Lazarus Group", "kind": "typo_or_variant"}
+{"id": "t-106", "query": "Ajax", "expected": "Ajax Security Team", "kind": "typo_or_variant"}
+{"id": "t-107", "query": "Aoqin", "expected": "Aoqin Dragon", "kind": "typo_or_variant"}
+{"id": "t-108", "query": "Cobalt", "expected": "Cobalt Group", "kind": "typo_or_variant"}
+{"id": "t-109", "query": "Allanite group", "expected": "ALLANITE", "kind": "typo_or_variant"}
+{"id": "t-110", "query": "APT33 (Elfin)", "expected": "APT33", "kind": "typo_or_variant"}
+{"id": "t-111", "query": "APT41", "expected": null, "kind": "out_of_scope"}
+{"id": "t-112", "query": "APT38", "expected": null, "kind": "out_of_scope"}
+{"id": "t-113", "query": "APT10", "expected": null, "kind": "out_of_scope"}
+{"id": "t-114", "query": "APT37", "expected": null, "kind": "out_of_scope"}
+{"id": "t-115", "query": "APT39", "expected": null, "kind": "out_of_scope"}
+{"id": "t-116", "query": "APT40", "expected": null, "kind": "out_of_scope"}
+{"id": "t-117", "query": "APT5", "expected": null, "kind": "out_of_scope"}
+{"id": "t-118", "query": "APT2", "expected": null, "kind": "out_of_scope"}
+{"id": "t-119", "query": "APT290", "expected": null, "kind": "out_of_scope"}
+{"id": "t-120", "query": "APT-C-99", "expected": null, "kind": "out_of_scope"}
+{"id": "t-121", "query": "FIN6", "expected": null, "kind": "out_of_scope"}
+{"id": "t-122", "query": "FIN8", "expected": null, "kind": "out_of_scope"}
+{"id": "t-123", "query": "FIN11", "expected": null, "kind": "out_of_scope"}
+{"id": "t-124", "query": "FIN70", "expected": null, "kind": "out_of_scope"}
+{"id": "t-125", "query": "MuddyWater", "expected": null, "kind": "out_of_scope"}
+{"id": "t-126", "query": "OilRig", "expected": null, "kind": "out_of_scope"}
+{"id": "t-127", "query": "Gamaredon Group", "expected": null, "kind": "out_of_scope"}
+{"id": "t-128", "query": "Mustang Panda", "expected": null, "kind": "out_of_scope"}
+{"id": "t-129", "query": "Scattered Spider", "expected": null, "kind": "out_of_scope"}
+{"id": "t-130", "query": "LockBit", "expected": null, "kind": "out_of_scope"}
+{"id": "t-131", "query": "Conti", "expected": null, "kind": "out_of_scope"}
+{"id": "t-132", "query": "Lapsus$", "expected": null, "kind": "out_of_scope"}
+{"id": "t-133", "query": "Dragonfly", "expected": null, "kind": "out_of_scope"}
+{"id": "t-134", "query": "Leviathan", "expected": null, "kind": "out_of_scope"}
+{"id": "t-135", "query": "Cobalt Strike", "expected": null, "kind": "out_of_scope"}
+{"id": "t-136", "query": "Mimikatz", "expected": null, "kind": "out_of_scope"}
+{"id": "t-137", "query": "Akira Kurosawa films", "expected": null, "kind": "out_of_scope"}
+{"id": "t-138", "query": "lazarus pits in fiction", "expected": null, "kind": "out_of_scope"}
+{"id": "t-139", "query": "Microsoft", "expected": null, "kind": "out_of_scope"}
+{"id": "t-140", "query": "CrowdStrike", "expected": null, "kind": "out_of_scope"}
+{"id": "t-141", "query": "MITRE ATT&CK", "expected": null, "kind": "out_of_scope"}
+{"id": "t-142", "query": "T1059", "expected": null, "kind": "out_of_scope"}
+{"id": "t-143", "query": "ransomware", "expected": null, "kind": "out_of_scope"}
+{"id": "t-144", "query": "nation-state hackers", "expected": null, "kind": "out_of_scope"}
+{"id": "t-145", "query": "a group", "expected": null, "kind": "out_of_scope"}
+{"id": "t-146", "query": "hello", "expected": null, "kind": "out_of_scope"}
+{"id": "t-147", "query": "asdfghjkl", "expected": null, "kind": "out_of_scope"}
+{"id": "t-148", "query": "123456", "expected": null, "kind": "out_of_scope"}
+{"id": "t-149", "query": "how do I cook rice", "expected": null, "kind": "out_of_scope"}
+{"id": "t-150", "query": "best coffee shops in Vancouver", "expected": null, "kind": "out_of_scope"}

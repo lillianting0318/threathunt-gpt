@@ -264,3 +264,43 @@ def test_resolve_group_reports_semantic(rag, monkeypatch):
 def test_resolve_group_returns_none_pair_when_nothing_matches(rag, monkeypatch):
     monkeypatch.setattr(rag, "semantic_search", lambda query, top_k=20: [])
     assert rag.resolve_group("completely unrelated nonsense query") == (None, None)
+
+
+# ---------------------------------------------------------------------------
+# Pass 1.7: separator-insensitive matching
+# ---------------------------------------------------------------------------
+
+@pytest.mark.parametrize("query", ["APT 1", "apt-1", "APT_1", "Apt.1"])
+def test_normalized_match_on_group_name(rag, query):
+    assert rag.resolve_group(query) == ("APT1", "normalized")
+
+
+def test_normalized_match_keeps_apt1_and_apt12_apart(rag):
+    assert rag.resolve_group("APT 12") == ("APT12", "normalized")
+    assert rag.resolve_group("APT 1") == ("APT1", "normalized")
+
+
+def test_normalized_match_on_alias(rag, monkeypatch):
+    monkeypatch.setattr(rag, "_alias_to_group", {"HIDDEN COBRA": "Lazarus Group"})
+    assert rag.resolve_group("Hidden-Cobra") == ("Lazarus Group", "normalized")
+
+
+# ---------------------------------------------------------------------------
+# Pass 4 gate: short queries never reach semantic search
+# ---------------------------------------------------------------------------
+
+def test_short_query_never_reaches_semantic_search(rag, monkeypatch):
+    def fail(*args, **kwargs):
+        raise AssertionError("semantic_search must not run for a short query")
+    monkeypatch.setattr(rag, "semantic_search", fail)
+    assert rag.resolve_group("FIN6") == (None, None)
+    assert rag.resolve_group("Cobalt Strike") == (None, None)
+
+
+def test_query_at_the_word_limit_reaches_semantic_search(rag, monkeypatch):
+    calls = []
+    monkeypatch.setattr(rag, "semantic_search",
+                        lambda query, top_k=20: calls.append(query) or [])
+    words = " ".join(["word"] * rag.SEMANTIC_MIN_WORDS)
+    rag.resolve_group(words)
+    assert calls == [words]

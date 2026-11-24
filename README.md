@@ -88,7 +88,7 @@ wired into the app, which resolves techniques from the threat-group name.
 
 **Limitations:** gpt-oss may have seen ATT&CK procedure examples during pretraining, which could inflate LLM-only scores. Costs use Groq list prices at the time of the run.
 
-Full results: [`eval/results/summary.md`](eval/results/summary.md) · Reproduce: `python eval/build_eval_set.py && python eval/run_eval.py run && python eval/run_eval.py report`
+Full results: [`eval/results/summary.md`](eval/results/summary.md) · Reproduce: `python eval/build_eval_set.py && python eval/run_ttp_eval.py run && python eval/run_ttp_eval.py report` · All evals: [`eval/README.md`](eval/README.md)
 
 ---
 

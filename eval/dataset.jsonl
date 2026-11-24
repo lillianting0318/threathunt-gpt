@@ -55,3 +55,33 @@
 {"id": "oo-08", "query": "qwertyuiop", "expected": null, "kind": "out_of_scope"}
 {"id": "oo-09", "query": "what is the weather in Vancouver today", "expected": null, "kind": "out_of_scope"}
 {"id": "oo-10", "query": "how do I reset my password", "expected": null, "kind": "out_of_scope"}
+{"id": "su-01", "query": "APT34", "expected": null, "kind": "short_unknown"}
+{"id": "su-02", "query": "APT35", "expected": null, "kind": "short_unknown"}
+{"id": "su-03", "query": "APT31", "expected": null, "kind": "short_unknown"}
+{"id": "su-04", "query": "APT27", "expected": null, "kind": "short_unknown"}
+{"id": "su-05", "query": "APT14", "expected": null, "kind": "short_unknown"}
+{"id": "su-06", "query": "FIN4", "expected": null, "kind": "short_unknown"}
+{"id": "su-07", "query": "FIN10", "expected": null, "kind": "short_unknown"}
+{"id": "su-08", "query": "FIN12", "expected": null, "kind": "short_unknown"}
+{"id": "su-09", "query": "BlackCat", "expected": null, "kind": "short_unknown"}
+{"id": "su-10", "query": "Cl0p", "expected": null, "kind": "short_unknown"}
+{"id": "su-11", "query": "REvil", "expected": null, "kind": "short_unknown"}
+{"id": "su-12", "query": "Emotet", "expected": null, "kind": "short_unknown"}
+{"id": "su-13", "query": "TrickBot", "expected": null, "kind": "short_unknown"}
+{"id": "su-14", "query": "Salt Typhoon", "expected": null, "kind": "short_unknown"}
+{"id": "su-15", "query": "Darkhotel", "expected": null, "kind": "short_unknown"}
+{"id": "su-16", "query": "malware", "expected": null, "kind": "short_unknown"}
+{"id": "su-17", "query": "phishing", "expected": null, "kind": "short_unknown"}
+{"id": "su-18", "query": "espionage", "expected": null, "kind": "short_unknown"}
+{"id": "su-19", "query": "Google", "expected": null, "kind": "short_unknown"}
+{"id": "su-20", "query": "Cobalt Kitty", "expected": null, "kind": "short_unknown"}
+{"id": "sv-01", "query": "apt-12", "expected": "APT12", "kind": "separator_variant"}
+{"id": "sv-02", "query": "APT_18", "expected": "APT18", "kind": "separator_variant"}
+{"id": "sv-03", "query": "Fin-7", "expected": "FIN7", "kind": "separator_variant"}
+{"id": "sv-04", "query": "Lazarus-Group", "expected": "Lazarus Group", "kind": "separator_variant"}
+{"id": "sv-05", "query": "Ajax-Security-Team", "expected": "Ajax Security Team", "kind": "separator_variant"}
+{"id": "sv-06", "query": "APT 16", "expected": "APT16", "kind": "separator_variant"}
+{"id": "sv-07", "query": "Aoqin-Dragon", "expected": "Aoqin Dragon", "kind": "separator_variant"}
+{"id": "sv-08", "query": "Cobalt_Group", "expected": "Cobalt Group", "kind": "separator_variant"}
+{"id": "sv-09", "query": "Carbon-Spider", "expected": "FIN7", "kind": "separator_variant"}
+{"id": "sv-10", "query": "Comment_Crew", "expected": "APT1", "kind": "separator_variant"}

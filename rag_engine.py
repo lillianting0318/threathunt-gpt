@@ -6,6 +6,7 @@ Handles FAISS vector search over MITRE ATT&CK techniques + CTI metadata.
 import hashlib
 import json
 import os
+import re
 import sys
 import time
 import numpy as np
@@ -128,6 +129,15 @@ def compute_index_cache_key(input_paths: List[str], model_name: str) -> str:
                 h.update(chunk)
     h.update(json.dumps(ICS_TECHNIQUES, sort_keys=True).encode())
     return h.hexdigest()
+
+
+def _normalize_identifier(text: str) -> str:
+    """Uppercase and drop whitespace, hyphens, underscores and dots.
+
+    "APT 28" / "apt-28" / "APT_28" -> "APT28". Used only for whole-string
+    equality, never for substring matching.
+    """
+    return re.sub(r"[\s\-_.]+", "", text).upper()
 
 
 class RAGEngine:
@@ -255,16 +265,18 @@ class RAGEngine:
     def resolve_group(self, query: str) -> Tuple[Optional[str], Optional[str]]:
         """
         Resolve `query` to (canonical group name, match method).
-        match method is one of: "exact", "alias", "word_boundary",
-        "substring", "semantic" — or (None, None) when nothing matches.
+        match method is one of: "exact", "alias", "normalized",
+        "word_boundary", "substring", "semantic" — or (None, None) when
+        nothing matches.
 
         精確比對優先，避免 APT1 匹配到 APT12 的 bug。
         比對順序：
           1. 完整字串相等（大小寫不分）
           1.5 MITRE 別名表（group_aliases.json，若存在）
+          1.7 去掉空白/連字號/底線後再比一次（"APT 28"、"Hidden-Cobra"）
           2. query 完整出現在 name 中，且前後是字詞邊界（word boundary）
           3. name 完整出現在 query 中，且前後是字詞邊界
-          4. 向量語意搜尋 fallback
+          4. 向量語意搜尋 fallback（只給夠長的描述型查詢）
         """
         import re
         q = query.strip()
@@ -281,6 +293,20 @@ class RAGEngine:
         if alias_hit:
             return alias_hit, "alias"
 
+        # Pass 1.7: separator-insensitive equality against names AND aliases.
+        # "APT 28", "apt_33", "Hidden-Cobra" are the same identifier written
+        # differently; resolving them here keeps them out of Pass 4, where a
+        # short string has almost no meaning to embed. Whole-string equality
+        # only, so "APT 1" still never becomes APT12.
+        q_norm = _normalize_identifier(q)
+        if q_norm:
+            for name in self._cti_by_group:
+                if _normalize_identifier(name) == q_norm:
+                    return name, "normalized"
+            for alias, group in self._alias_to_group.items():
+                if _normalize_identifier(alias) == q_norm:
+                    return group, "normalized"
+
         # Pass 2: word-boundary 比對
         # 例："APT1" 不會匹配 "APT12" 因為 APT1 後面跟著數字
         for name in self._cti_by_group:
@@ -293,6 +319,19 @@ class RAGEngine:
             pattern = r'(?<![A-Z0-9])' + re.escape(q_upper) + r'(?![A-Z0-9])'
             if re.search(pattern, name.upper()):
                 return name, "substring"
+
+        # Pass 4 gate: descriptive queries only.
+        #
+        # The held-out test set (eval/group_test.jsonl, Nov 24) showed Pass 4
+        # answering 20 queries and getting 13 wrong: almost all short,
+        # name-like strings ("FIN6" -> FIN7, "Microsoft" -> admin@338).
+        # A one- or two-word name carries little meaning for the embedding,
+        # so the nearest group is chosen by surface similarity. Pass 4 exists
+        # for descriptions ("the group behind the SolarWinds compromise"),
+        # so shorter queries stop here with "no match" — a miss is safer
+        # than a confident wrong group.
+        if len(q.split()) < self.SEMANTIC_MIN_WORDS:
+            return None, None
 
         # Pass 4: semantic fallback, guarded by distance AND margin.
         #
@@ -338,6 +377,11 @@ class RAGEngine:
     # The index is ~97% MITRE technique vectors, so a narrow top_k often
     # returns no group at all.
     GROUP_SEARCH_TOP_K = 20
+
+    # Minimum words before Pass 4 may run. The shortest descriptive query in
+    # the dev set has 4 words ("Chinese PLA Unit 61398"). Chosen on the dev
+    # set (eval/sweep_thresholds.py), never on the test set.
+    SEMANTIC_MIN_WORDS = 4
 
     # Tuned on eval/dataset.jsonl (sweep: eval/diagnose_margin.py).
     # METRIC_L2: smaller = closer.  METRIC_INNER_PRODUCT: larger = closer.

@@ -1,0 +1,1369 @@
+{
+  "summary": {
+    "n": 150,
+    "accuracy": 0.9266666666666666,
+    "false_match_rate_out_of_scope": 0.05,
+    "wrong_group_rate_in_scope": 0.0,
+    "by_method": {
+      "exact": 30,
+      "alias": 40,
+      "word_boundary": 23,
+      "normalized": 6,
+      "none": 47,
+      "substring": 3,
+      "semantic": 1
+    }
+  },
+  "results": [
+    {
+      "id": "t-001",
+      "kind": "exact",
+      "query": "apt1",
+      "expected": "APT1",
+      "actual": "APT1",
+      "method": "exact",
+      "outcome": "correct"
+    },
+    {
+      "id": "t-002",
+      "kind": "exact",
+      "query": "Apt12",
+      "expected": "APT12",
+      "actual": "APT12",
+      "method": "exact",
+      "outcome": "correct"
+    },
+    {
+      "id": "t-003",
+      "kind": "exact",
+      "query": "apt16",
+      "expected": "APT16",
+      "actual": "APT16",
+      "method": "exact",
+      "outcome": "correct"
+    },
+    {
+      "id": "t-004",
+      "kind": "exact",
+      "query": "Apt17",
+      "expected": "APT17",
+      "actual": "APT17",
+      "method": "exact",
+      "outcome": "correct"
+    },
+    {
+      "id": "t-005",
+      "kind": "exact",
+      "query": "apt18",
+      "expected": "APT18",
+      "actual": "APT18",
+      "method": "exact",
+      "outcome": "correct"
+    },
+    {
+      "id": "t-006",
+      "kind": "exact",
+      "query": "apt19",
+      "expected": "APT19",
+      "actual": "APT19",
+      "method": "exact",
+      "outcome": "correct"
+    },
+    {
+      "id": "t-007",
+      "kind": "exact",
+      "query": "apt28",
+      "expected": "APT28",
+      "actual": "APT28",
+      "method": "exact",
+      "outcome": "correct"
+    },
+    {
+      "id": "t-008",
+      "kind": "exact",
+      "query": "Apt29",
+      "expected": "APT29",
+      "actual": "APT29",
+      "method": "exact",
+      "outcome": "correct"
+    },
+    {
+      "id": "t-009",
+      "kind": "exact",
+      "query": "apt3",
+      "expected": "APT3",
+      "actual": "APT3",
+      "method": "exact",
+      "outcome": "correct"
+    },
+    {
+      "id": "t-010",
+      "kind": "exact",
+      "query": "apt30",
+      "expected": "APT30",
+      "actual": "APT30",
+      "method": "exact",
+      "outcome": "correct"
+    },
+    {
+      "id": "t-011",
+      "kind": "exact",
+      "query": "apt32",
+      "expected": "APT32",
+      "actual": "APT32",
+      "method": "exact",
+      "outcome": "correct"
+    },
+    {
+      "id": "t-012",
+      "kind": "exact",
+      "query": "apt33",
+      "expected": "APT33",
+      "actual": "APT33",
+      "method": "exact",
+      "outcome": "correct"
+    },
+    {
+      "id": "t-013",
+      "kind": "exact",
+      "query": "apt-c-23",
+      "expected": "APT-C-23",
+      "actual": "APT-C-23",
+      "method": "exact",
+      "outcome": "correct"
+    },
+    {
+      "id": "t-014",
+      "kind": "exact",
+      "query": "Apt-C-36",
+      "expected": "APT-C-36",
+      "actual": "APT-C-36",
+      "method": "exact",
+      "outcome": "correct"
+    },
+    {
+      "id": "t-015",
+      "kind": "exact",
+      "query": "Agrius",
+      "expected": "Agrius",
+      "actual": "Agrius",
+      "method": "exact",
+      "outcome": "correct"
+    },
+    {
+      "id": "t-016",
+      "kind": "exact",
+      "query": "AGRIUS",
+      "expected": "Agrius",
+      "actual": "Agrius",
+      "method": "exact",
+      "outcome": "correct"
+    },
+    {
+      "id": "t-017",
+      "kind": "exact",
+      "query": "Ajax Security Team",
+      "expected": "Ajax Security Team",
+      "actual": "Ajax Security Team",
+      "method": "exact",
+      "outcome": "correct"
+    },
+    {
+      "id": "t-018",
+      "kind": "exact",
+      "query": "AKIRA",
+      "expected": "Akira",
+      "actual": "Akira",
+      "method": "exact",
+      "outcome": "correct"
+    },
+    {
+      "id": "t-019",
+      "kind": "exact",
+      "query": "Andariel",
+      "expected": "Andariel",
+      "actual": "Andariel",
+      "method": "exact",
+      "outcome": "correct"
+    },
+    {
+      "id": "t-020",
+      "kind": "exact",
+      "query": "ANDARIEL",
+      "expected": "Andariel",
+      "actual": "Andariel",
+      "method": "exact",
+      "outcome": "correct"
+    },
+    {
+      "id": "t-021",
+      "kind": "exact",
+      "query": "allanite",
+      "expected": "ALLANITE",
+      "actual": "ALLANITE",
+      "method": "exact",
+      "outcome": "correct"
+    },
+    {
+      "id": "t-022",
+      "kind": "exact",
+      "query": "AOQIN DRAGON",
+      "expected": "Aoqin Dragon",
+      "actual": "Aoqin Dragon",
+      "method": "exact",
+      "outcome": "correct"
+    },
+    {
+      "id": "t-023",
+      "kind": "exact",
+      "query": "Cobalt Group",
+      "expected": "Cobalt Group",
+      "actual": "Cobalt Group",
+      "method": "exact",
+      "outcome": "correct"
+    },
+    {
+      "id": "t-024",
+      "kind": "exact",
+      "query": "COBALT GROUP",
+      "expected": "Cobalt Group",
+      "actual": "Cobalt Group",
+      "method": "exact",
+      "outcome": "correct"
+    },
+    {
+      "id": "t-025",
+      "kind": "exact",
+      "query": "fin7",
+      "expected": "FIN7",
+      "actual": "FIN7",
+      "method": "exact",
+      "outcome": "correct"
+    },
+    {
+      "id": "t-026",
+      "kind": "exact",
+      "query": "lazarus group",
+      "expected": "Lazarus Group",
+      "actual": "Lazarus Group",
+      "method": "exact",
+      "outcome": "correct"
+    },
+    {
+      "id": "t-027",
+      "kind": "exact",
+      "query": "LAZARUS GROUP",
+      "expected": "Lazarus Group",
+      "actual": "Lazarus Group",
+      "method": "exact",
+      "outcome": "correct"
+    },
+    {
+      "id": "t-028",
+      "kind": "exact",
+      "query": "ADMIN@338",
+      "expected": "admin@338",
+      "actual": "admin@338",
+      "method": "exact",
+      "outcome": "correct"
+    },
+    {
+      "id": "t-029",
+      "kind": "exact",
+      "query": "  APT28  ",
+      "expected": "APT28",
+      "actual": "APT28",
+      "method": "exact",
+      "outcome": "correct"
+    },
+    {
+      "id": "t-030",
+      "kind": "exact",
+      "query": "\tFIN7\n",
+      "expected": "FIN7",
+      "actual": "FIN7",
+      "method": "exact",
+      "outcome": "correct"
+    },
+    {
+      "id": "t-031",
+      "kind": "alias",
+      "query": "Sofacy",
+      "expected": "APT28",
+      "actual": "APT28",
+      "method": "alias",
+      "outcome": "correct"
+    },
+    {
+      "id": "t-032",
+      "kind": "alias",
+      "query": "Sednit",
+      "expected": "APT28",
+      "actual": "APT28",
+      "method": "alias",
+      "outcome": "correct"
+    },
+    {
+      "id": "t-033",
+      "kind": "alias",
+      "query": "Pawn Storm",
+      "expected": "APT28",
+      "actual": "APT28",
+      "method": "alias",
+      "outcome": "correct"
+    },
+    {
+      "id": "t-034",
+      "kind": "alias",
+      "query": "Strontium",
+      "expected": "APT28",
+      "actual": "APT28",
+      "method": "alias",
+      "outcome": "correct"
+    },
+    {
+      "id": "t-035",
+      "kind": "alias",
+      "query": "Tsar Team",
+      "expected": "APT28",
+      "actual": "APT28",
+      "method": "alias",
+      "outcome": "correct"
+    },
+    {
+      "id": "t-036",
+      "kind": "alias",
+      "query": "The Dukes",
+      "expected": "APT29",
+      "actual": "APT29",
+      "method": "alias",
+      "outcome": "correct"
+    },
+    {
+      "id": "t-037",
+      "kind": "alias",
+      "query": "Nobelium",
+      "expected": "APT29",
+      "actual": "APT29",
+      "method": "alias",
+      "outcome": "correct"
+    },
+    {
+      "id": "t-038",
+      "kind": "alias",
+      "query": "YTTRIUM",
+      "expected": "APT29",
+      "actual": "APT29",
+      "method": "alias",
+      "outcome": "correct"
+    },
+    {
+      "id": "t-039",
+      "kind": "alias",
+      "query": "Dark Halo",
+      "expected": "APT29",
+      "actual": "APT29",
+      "method": "alias",
+      "outcome": "correct"
+    },
+    {
+      "id": "t-040",
+      "kind": "alias",
+      "query": "UNC2452",
+      "expected": "APT29",
+      "actual": "APT29",
+      "method": "alias",
+      "outcome": "correct"
+    },
+    {
+      "id": "t-041",
+      "kind": "alias",
+      "query": "Comment Panda",
+      "expected": "APT1",
+      "actual": "APT1",
+      "method": "alias",
+      "outcome": "correct"
+    },
+    {
+      "id": "t-042",
+      "kind": "alias",
+      "query": "Comment Group",
+      "expected": "APT1",
+      "actual": "APT1",
+      "method": "alias",
+      "outcome": "correct"
+    },
+    {
+      "id": "t-043",
+      "kind": "alias",
+      "query": "Gothic Panda",
+      "expected": "APT3",
+      "actual": "APT3",
+      "method": "alias",
+      "outcome": "correct"
+    },
+    {
+      "id": "t-044",
+      "kind": "alias",
+      "query": "UPS Team",
+      "expected": "APT3",
+      "actual": "APT3",
+      "method": "alias",
+      "outcome": "correct"
+    },
+    {
+      "id": "t-045",
+      "kind": "alias",
+      "query": "Deputy Dog",
+      "expected": "APT17",
+      "actual": "APT17",
+      "method": "alias",
+      "outcome": "correct"
+    },
+    {
+      "id": "t-046",
+      "kind": "alias",
+      "query": "Dynamite Panda",
+      "expected": "APT18",
+      "actual": "APT18",
+      "method": "alias",
+      "outcome": "correct"
+    },
+    {
+      "id": "t-047",
+      "kind": "alias",
+      "query": "Codoso",
+      "expected": "APT19",
+      "actual": "APT19",
+      "method": "alias",
+      "outcome": "correct"
+    },
+    {
+      "id": "t-048",
+      "kind": "alias",
+      "query": "Sunshop Group",
+      "expected": "APT19",
+      "actual": "APT19",
+      "method": "alias",
+      "outcome": "correct"
+    },
+    {
+      "id": "t-049",
+      "kind": "alias",
+      "query": "IXESHE",
+      "expected": "APT12",
+      "actual": "APT12",
+      "method": "alias",
+      "outcome": "correct"
+    },
+    {
+      "id": "t-050",
+      "kind": "alias",
+      "query": "DynCalc",
+      "expected": "APT12",
+      "actual": "APT12",
+      "method": "alias",
+      "outcome": "correct"
+    },
+    {
+      "id": "t-051",
+      "kind": "alias",
+      "query": "SeaLotus",
+      "expected": "APT32",
+      "actual": "APT32",
+      "method": "alias",
+      "outcome": "correct"
+    },
+    {
+      "id": "t-052",
+      "kind": "alias",
+      "query": "APT-C-00",
+      "expected": "APT32",
+      "actual": "APT32",
+      "method": "alias",
+      "outcome": "correct"
+    },
+    {
+      "id": "t-053",
+      "kind": "alias",
+      "query": "Bismuth",
+      "expected": "APT32",
+      "actual": "APT32",
+      "method": "alias",
+      "outcome": "correct"
+    },
+    {
+      "id": "t-054",
+      "kind": "alias",
+      "query": "Canvas Cyclone",
+      "expected": "APT32",
+      "actual": "APT32",
+      "method": "alias",
+      "outcome": "correct"
+    },
+    {
+      "id": "t-055",
+      "kind": "alias",
+      "query": "Holmium",
+      "expected": "APT33",
+      "actual": "APT33",
+      "method": "alias",
+      "outcome": "correct"
+    },
+    {
+      "id": "t-056",
+      "kind": "alias",
+      "query": "Pink Sandstorm",
+      "expected": "Agrius",
+      "actual": "Agrius",
+      "method": "alias",
+      "outcome": "correct"
+    },
+    {
+      "id": "t-057",
+      "kind": "alias",
+      "query": "Agonizing Serpens",
+      "expected": "Agrius",
+      "actual": "Agrius",
+      "method": "alias",
+      "outcome": "correct"
+    },
+    {
+      "id": "t-058",
+      "kind": "alias",
+      "query": "BlackShadow",
+      "expected": "Agrius",
+      "actual": "Agrius",
+      "method": "alias",
+      "outcome": "correct"
+    },
+    {
+      "id": "t-059",
+      "kind": "alias",
+      "query": "Flying Kitten",
+      "expected": "Ajax Security Team",
+      "actual": "Ajax Security Team",
+      "method": "alias",
+      "outcome": "correct"
+    },
+    {
+      "id": "t-060",
+      "kind": "alias",
+      "query": "Gold Sahara",
+      "expected": "Akira",
+      "actual": "Akira",
+      "method": "alias",
+      "outcome": "correct"
+    },
+    {
+      "id": "t-061",
+      "kind": "alias",
+      "query": "Punk Spider",
+      "expected": "Akira",
+      "actual": "Akira",
+      "method": "alias",
+      "outcome": "correct"
+    },
+    {
+      "id": "t-062",
+      "kind": "alias",
+      "query": "Plutonium",
+      "expected": "Andariel",
+      "actual": "Andariel",
+      "method": "alias",
+      "outcome": "correct"
+    },
+    {
+      "id": "t-063",
+      "kind": "alias",
+      "query": "Silent Chollima",
+      "expected": "Andariel",
+      "actual": "Andariel",
+      "method": "alias",
+      "outcome": "correct"
+    },
+    {
+      "id": "t-064",
+      "kind": "alias",
+      "query": "Cobalt Gang",
+      "expected": "Cobalt Group",
+      "actual": "Cobalt Group",
+      "method": "alias",
+      "outcome": "correct"
+    },
+    {
+      "id": "t-065",
+      "kind": "alias",
+      "query": "Gold Kingswood",
+      "expected": "Cobalt Group",
+      "actual": "Cobalt Group",
+      "method": "alias",
+      "outcome": "correct"
+    },
+    {
+      "id": "t-066",
+      "kind": "alias",
+      "query": "Gold Niagara",
+      "expected": "FIN7",
+      "actual": "FIN7",
+      "method": "alias",
+      "outcome": "correct"
+    },
+    {
+      "id": "t-067",
+      "kind": "alias",
+      "query": "ITG14",
+      "expected": "FIN7",
+      "actual": "FIN7",
+      "method": "alias",
+      "outcome": "correct"
+    },
+    {
+      "id": "t-068",
+      "kind": "alias",
+      "query": "Diamond Sleet",
+      "expected": "Lazarus Group",
+      "actual": "Lazarus Group",
+      "method": "alias",
+      "outcome": "correct"
+    },
+    {
+      "id": "t-069",
+      "kind": "alias",
+      "query": "ZINC",
+      "expected": "Lazarus Group",
+      "actual": "Lazarus Group",
+      "method": "alias",
+      "outcome": "correct"
+    },
+    {
+      "id": "t-070",
+      "kind": "alias",
+      "query": "Arid Viper",
+      "expected": "APT-C-23",
+      "actual": "APT-C-23",
+      "method": "alias",
+      "outcome": "correct"
+    },
+    {
+      "id": "t-071",
+      "kind": "substring_trap",
+      "query": "APT1 indicators",
+      "expected": "APT1",
+      "actual": "APT1",
+      "method": "word_boundary",
+      "outcome": "correct"
+    },
+    {
+      "id": "t-072",
+      "kind": "substring_trap",
+      "query": "indicators for APT12",
+      "expected": "APT12",
+      "actual": "APT12",
+      "method": "word_boundary",
+      "outcome": "correct"
+    },
+    {
+      "id": "t-073",
+      "kind": "substring_trap",
+      "query": "hunt for APT16 activity",
+      "expected": "APT16",
+      "actual": "APT16",
+      "method": "word_boundary",
+      "outcome": "correct"
+    },
+    {
+      "id": "t-074",
+      "kind": "substring_trap",
+      "query": "APT17's malware",
+      "expected": "APT17",
+      "actual": "APT17",
+      "method": "word_boundary",
+      "outcome": "correct"
+    },
+    {
+      "id": "t-075",
+      "kind": "substring_trap",
+      "query": "is APT18 still active?",
+      "expected": "APT18",
+      "actual": "APT18",
+      "method": "word_boundary",
+      "outcome": "correct"
+    },
+    {
+      "id": "t-076",
+      "kind": "substring_trap",
+      "query": "APT19 phishing campaign",
+      "expected": "APT19",
+      "actual": "APT19",
+      "method": "word_boundary",
+      "outcome": "correct"
+    },
+    {
+      "id": "t-077",
+      "kind": "substring_trap",
+      "query": "report on APT3",
+      "expected": "APT3",
+      "actual": "APT3",
+      "method": "word_boundary",
+      "outcome": "correct"
+    },
+    {
+      "id": "t-078",
+      "kind": "substring_trap",
+      "query": "APT30 targets in Southeast Asia",
+      "expected": "APT30",
+      "actual": "APT30",
+      "method": "word_boundary",
+      "outcome": "correct"
+    },
+    {
+      "id": "t-079",
+      "kind": "substring_trap",
+      "query": "APT32 in Vietnam",
+      "expected": "APT32",
+      "actual": "APT32",
+      "method": "word_boundary",
+      "outcome": "correct"
+    },
+    {
+      "id": "t-080",
+      "kind": "substring_trap",
+      "query": "what does APT33 target?",
+      "expected": "APT33",
+      "actual": "APT33",
+      "method": "word_boundary",
+      "outcome": "correct"
+    },
+    {
+      "id": "t-081",
+      "kind": "substring_trap",
+      "query": "APT-C-23 mobile malware",
+      "expected": "APT-C-23",
+      "actual": "APT-C-23",
+      "method": "word_boundary",
+      "outcome": "correct"
+    },
+    {
+      "id": "t-082",
+      "kind": "substring_trap",
+      "query": "APT-C-36 phishing in Colombia",
+      "expected": "APT-C-36",
+      "actual": "APT-C-36",
+      "method": "word_boundary",
+      "outcome": "correct"
+    },
+    {
+      "id": "t-083",
+      "kind": "substring_trap",
+      "query": "FIN7 TTPs",
+      "expected": "FIN7",
+      "actual": "FIN7",
+      "method": "word_boundary",
+      "outcome": "correct"
+    },
+    {
+      "id": "t-084",
+      "kind": "substring_trap",
+      "query": "techniques used by Andariel",
+      "expected": "Andariel",
+      "actual": "Andariel",
+      "method": "word_boundary",
+      "outcome": "correct"
+    },
+    {
+      "id": "t-085",
+      "kind": "substring_trap",
+      "query": "Akira ransomware",
+      "expected": "Akira",
+      "actual": "Akira",
+      "method": "word_boundary",
+      "outcome": "correct"
+    },
+    {
+      "id": "t-086",
+      "kind": "substring_trap",
+      "query": "detections for Agrius",
+      "expected": "Agrius",
+      "actual": "Agrius",
+      "method": "word_boundary",
+      "outcome": "correct"
+    },
+    {
+      "id": "t-087",
+      "kind": "substring_trap",
+      "query": "timeline of Cobalt Group attacks",
+      "expected": "Cobalt Group",
+      "actual": "Cobalt Group",
+      "method": "word_boundary",
+      "outcome": "correct"
+    },
+    {
+      "id": "t-088",
+      "kind": "substring_trap",
+      "query": "ALLANITE ICS activity",
+      "expected": "ALLANITE",
+      "actual": "ALLANITE",
+      "method": "word_boundary",
+      "outcome": "correct"
+    },
+    {
+      "id": "t-089",
+      "kind": "substring_trap",
+      "query": "admin@338 targets",
+      "expected": "admin@338",
+      "actual": "admin@338",
+      "method": "word_boundary",
+      "outcome": "correct"
+    },
+    {
+      "id": "t-090",
+      "kind": "substring_trap",
+      "query": "Aoqin Dragon espionage",
+      "expected": "Aoqin Dragon",
+      "actual": "Aoqin Dragon",
+      "method": "word_boundary",
+      "outcome": "correct"
+    },
+    {
+      "id": "t-091",
+      "kind": "typo_or_variant",
+      "query": "APT 28",
+      "expected": "APT28",
+      "actual": "APT28",
+      "method": "normalized",
+      "outcome": "correct"
+    },
+    {
+      "id": "t-092",
+      "kind": "typo_or_variant",
+      "query": "APT-29",
+      "expected": "APT29",
+      "actual": "APT29",
+      "method": "normalized",
+      "outcome": "correct"
+    },
+    {
+      "id": "t-093",
+      "kind": "typo_or_variant",
+      "query": "apt_33",
+      "expected": "APT33",
+      "actual": "APT33",
+      "method": "normalized",
+      "outcome": "correct"
+    },
+    {
+      "id": "t-094",
+      "kind": "typo_or_variant",
+      "query": "Fin 7",
+      "expected": "FIN7",
+      "actual": "FIN7",
+      "method": "normalized",
+      "outcome": "correct"
+    },
+    {
+      "id": "t-095",
+      "kind": "typo_or_variant",
+      "query": "Lazerus Group",
+      "expected": "Lazarus Group",
+      "actual": null,
+      "method": null,
+      "outcome": "missed"
+    },
+    {
+      "id": "t-096",
+      "kind": "typo_or_variant",
+      "query": "Lazarus Grp",
+      "expected": "Lazarus Group",
+      "actual": null,
+      "method": null,
+      "outcome": "missed"
+    },
+    {
+      "id": "t-097",
+      "kind": "typo_or_variant",
+      "query": "Andarial",
+      "expected": "Andariel",
+      "actual": null,
+      "method": null,
+      "outcome": "missed"
+    },
+    {
+      "id": "t-098",
+      "kind": "typo_or_variant",
+      "query": "Akria",
+      "expected": "Akira",
+      "actual": null,
+      "method": null,
+      "outcome": "missed"
+    },
+    {
+      "id": "t-099",
+      "kind": "typo_or_variant",
+      "query": "Agrios",
+      "expected": "Agrius",
+      "actual": null,
+      "method": null,
+      "outcome": "missed"
+    },
+    {
+      "id": "t-100",
+      "kind": "typo_or_variant",
+      "query": "Aoquin Dragon",
+      "expected": "Aoqin Dragon",
+      "actual": null,
+      "method": null,
+      "outcome": "missed"
+    },
+    {
+      "id": "t-101",
+      "kind": "typo_or_variant",
+      "query": "Cobalt Grp",
+      "expected": "Cobalt Group",
+      "actual": null,
+      "method": null,
+      "outcome": "missed"
+    },
+    {
+      "id": "t-102",
+      "kind": "typo_or_variant",
+      "query": "Fancy Bare",
+      "expected": "APT28",
+      "actual": null,
+      "method": null,
+      "outcome": "missed"
+    },
+    {
+      "id": "t-103",
+      "kind": "typo_or_variant",
+      "query": "Cozy Bera",
+      "expected": "APT29",
+      "actual": null,
+      "method": null,
+      "outcome": "missed"
+    },
+    {
+      "id": "t-104",
+      "kind": "typo_or_variant",
+      "query": "Ocean Lotus",
+      "expected": "APT32",
+      "actual": "APT32",
+      "method": "normalized",
+      "outcome": "correct"
+    },
+    {
+      "id": "t-105",
+      "kind": "typo_or_variant",
+      "query": "Hidden-Cobra",
+      "expected": "Lazarus Group",
+      "actual": "Lazarus Group",
+      "method": "normalized",
+      "outcome": "correct"
+    },
+    {
+      "id": "t-106",
+      "kind": "typo_or_variant",
+      "query": "Ajax",
+      "expected": "Ajax Security Team",
+      "actual": "Ajax Security Team",
+      "method": "substring",
+      "outcome": "correct"
+    },
+    {
+      "id": "t-107",
+      "kind": "typo_or_variant",
+      "query": "Aoqin",
+      "expected": "Aoqin Dragon",
+      "actual": "Aoqin Dragon",
+      "method": "substring",
+      "outcome": "correct"
+    },
+    {
+      "id": "t-108",
+      "kind": "typo_or_variant",
+      "query": "Cobalt",
+      "expected": "Cobalt Group",
+      "actual": "Cobalt Group",
+      "method": "substring",
+      "outcome": "correct"
+    },
+    {
+      "id": "t-109",
+      "kind": "typo_or_variant",
+      "query": "Allanite group",
+      "expected": "ALLANITE",
+      "actual": "ALLANITE",
+      "method": "word_boundary",
+      "outcome": "correct"
+    },
+    {
+      "id": "t-110",
+      "kind": "typo_or_variant",
+      "query": "APT33 (Elfin)",
+      "expected": "APT33",
+      "actual": "APT33",
+      "method": "word_boundary",
+      "outcome": "correct"
+    },
+    {
+      "id": "t-111",
+      "kind": "out_of_scope",
+      "query": "APT41",
+      "expected": null,
+      "actual": null,
+      "method": null,
+      "outcome": "correct"
+    },
+    {
+      "id": "t-112",
+      "kind": "out_of_scope",
+      "query": "APT38",
+      "expected": null,
+      "actual": null,
+      "method": null,
+      "outcome": "correct"
+    },
+    {
+      "id": "t-113",
+      "kind": "out_of_scope",
+      "query": "APT10",
+      "expected": null,
+      "actual": null,
+      "method": null,
+      "outcome": "correct"
+    },
+    {
+      "id": "t-114",
+      "kind": "out_of_scope",
+      "query": "APT37",
+      "expected": null,
+      "actual": null,
+      "method": null,
+      "outcome": "correct"
+    },
+    {
+      "id": "t-115",
+      "kind": "out_of_scope",
+      "query": "APT39",
+      "expected": null,
+      "actual": null,
+      "method": null,
+      "outcome": "correct"
+    },
+    {
+      "id": "t-116",
+      "kind": "out_of_scope",
+      "query": "APT40",
+      "expected": null,
+      "actual": null,
+      "method": null,
+      "outcome": "correct"
+    },
+    {
+      "id": "t-117",
+      "kind": "out_of_scope",
+      "query": "APT5",
+      "expected": null,
+      "actual": null,
+      "method": null,
+      "outcome": "correct"
+    },
+    {
+      "id": "t-118",
+      "kind": "out_of_scope",
+      "query": "APT2",
+      "expected": null,
+      "actual": null,
+      "method": null,
+      "outcome": "correct"
+    },
+    {
+      "id": "t-119",
+      "kind": "out_of_scope",
+      "query": "APT290",
+      "expected": null,
+      "actual": null,
+      "method": null,
+      "outcome": "correct"
+    },
+    {
+      "id": "t-120",
+      "kind": "out_of_scope",
+      "query": "APT-C-99",
+      "expected": null,
+      "actual": null,
+      "method": null,
+      "outcome": "correct"
+    },
+    {
+      "id": "t-121",
+      "kind": "out_of_scope",
+      "query": "FIN6",
+      "expected": null,
+      "actual": null,
+      "method": null,
+      "outcome": "correct"
+    },
+    {
+      "id": "t-122",
+      "kind": "out_of_scope",
+      "query": "FIN8",
+      "expected": null,
+      "actual": null,
+      "method": null,
+      "outcome": "correct"
+    },
+    {
+      "id": "t-123",
+      "kind": "out_of_scope",
+      "query": "FIN11",
+      "expected": null,
+      "actual": null,
+      "method": null,
+      "outcome": "correct"
+    },
+    {
+      "id": "t-124",
+      "kind": "out_of_scope",
+      "query": "FIN70",
+      "expected": null,
+      "actual": null,
+      "method": null,
+      "outcome": "correct"
+    },
+    {
+      "id": "t-125",
+      "kind": "out_of_scope",
+      "query": "MuddyWater",
+      "expected": null,
+      "actual": null,
+      "method": null,
+      "outcome": "correct"
+    },
+    {
+      "id": "t-126",
+      "kind": "out_of_scope",
+      "query": "OilRig",
+      "expected": null,
+      "actual": null,
+      "method": null,
+      "outcome": "correct"
+    },
+    {
+      "id": "t-127",
+      "kind": "out_of_scope",
+      "query": "Gamaredon Group",
+      "expected": null,
+      "actual": null,
+      "method": null,
+      "outcome": "correct"
+    },
+    {
+      "id": "t-128",
+      "kind": "out_of_scope",
+      "query": "Mustang Panda",
+      "expected": null,
+      "actual": null,
+      "method": null,
+      "outcome": "correct"
+    },
+    {
+      "id": "t-129",
+      "kind": "out_of_scope",
+      "query": "Scattered Spider",
+      "expected": null,
+      "actual": null,
+      "method": null,
+      "outcome": "correct"
+    },
+    {
+      "id": "t-130",
+      "kind": "out_of_scope",
+      "query": "LockBit",
+      "expected": null,
+      "actual": null,
+      "method": null,
+      "outcome": "correct"
+    },
+    {
+      "id": "t-131",
+      "kind": "out_of_scope",
+      "query": "Conti",
+      "expected": null,
+      "actual": null,
+      "method": null,
+      "outcome": "correct"
+    },
+    {
+      "id": "t-132",
+      "kind": "out_of_scope",
+      "query": "Lapsus$",
+      "expected": null,
+      "actual": null,
+      "method": null,
+      "outcome": "correct"
+    },
+    {
+      "id": "t-133",
+      "kind": "out_of_scope",
+      "query": "Dragonfly",
+      "expected": null,
+      "actual": null,
+      "method": null,
+      "outcome": "correct"
+    },
+    {
+      "id": "t-134",
+      "kind": "out_of_scope",
+      "query": "Leviathan",
+      "expected": null,
+      "actual": null,
+      "method": null,
+      "outcome": "correct"
+    },
+    {
+      "id": "t-135",
+      "kind": "out_of_scope",
+      "query": "Cobalt Strike",
+      "expected": null,
+      "actual": null,
+      "method": null,
+      "outcome": "correct"
+    },
+    {
+      "id": "t-136",
+      "kind": "out_of_scope",
+      "query": "Mimikatz",
+      "expected": null,
+      "actual": null,
+      "method": null,
+      "outcome": "correct"
+    },
+    {
+      "id": "t-137",
+      "kind": "out_of_scope",
+      "query": "Akira Kurosawa films",
+      "expected": null,
+      "actual": "Akira",
+      "method": "word_boundary",
+      "outcome": "wrong"
+    },
+    {
+      "id": "t-138",
+      "kind": "out_of_scope",
+      "query": "lazarus pits in fiction",
+      "expected": null,
+      "actual": "Lazarus Group",
+      "method": "semantic",
+      "outcome": "wrong"
+    },
+    {
+      "id": "t-139",
+      "kind": "out_of_scope",
+      "query": "Microsoft",
+      "expected": null,
+      "actual": null,
+      "method": null,
+      "outcome": "correct"
+    },
+    {
+      "id": "t-140",
+      "kind": "out_of_scope",
+      "query": "CrowdStrike",
+      "expected": null,
+      "actual": null,
+      "method": null,
+      "outcome": "correct"
+    },
+    {
+      "id": "t-141",
+      "kind": "out_of_scope",
+      "query": "MITRE ATT&CK",
+      "expected": null,
+      "actual": null,
+      "method": null,
+      "outcome": "correct"
+    },
+    {
+      "id": "t-142",
+      "kind": "out_of_scope",
+      "query": "T1059",
+      "expected": null,
+      "actual": null,
+      "method": null,
+      "outcome": "correct"
+    },
+    {
+      "id": "t-143",
+      "kind": "out_of_scope",
+      "query": "ransomware",
+      "expected": null,
+      "actual": null,
+      "method": null,
+      "outcome": "correct"
+    },
+    {
+      "id": "t-144",
+      "kind": "out_of_scope",
+      "query": "nation-state hackers",
+      "expected": null,
+      "actual": null,
+      "method": null,
+      "outcome": "correct"
+    },
+    {
+      "id": "t-145",
+      "kind": "out_of_scope",
+      "query": "a group",
+      "expected": null,
+      "actual": null,
+      "method": null,
+      "outcome": "correct"
+    },
+    {
+      "id": "t-146",
+      "kind": "out_of_scope",
+      "query": "hello",
+      "expected": null,
+      "actual": null,
+      "method": null,
+      "outcome": "correct"
+    },
+    {
+      "id": "t-147",
+      "kind": "out_of_scope",
+      "query": "asdfghjkl",
+      "expected": null,
+      "actual": null,
+      "method": null,
+      "outcome": "correct"
+    },
+    {
+      "id": "t-148",
+      "kind": "out_of_scope",
+      "query": "123456",
+      "expected": null,
+      "actual": null,
+      "method": null,
+      "outcome": "correct"
+    },
+    {
+      "id": "t-149",
+      "kind": "out_of_scope",
+      "query": "how do I cook rice",
+      "expected": null,
+      "actual": null,
+      "method": null,
+      "outcome": "correct"
+    },
+    {
+      "id": "t-150",
+      "kind": "out_of_scope",
+      "query": "best coffee shops in Vancouver",
+      "expected": null,
+      "actual": null,
+      "method": null,
+      "outcome": "correct"
+    }
+  ]
+}

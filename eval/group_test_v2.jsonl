@@ -1,0 +1,100 @@
+{"id": "v2-001", "query": "aPt28", "expected": "APT28", "kind": "exact"}
+{"id": "v2-002", "query": "fin7", "expected": "FIN7", "kind": "exact"}
+{"id": "v2-003", "query": "Akira", "expected": "Akira", "kind": "exact"}
+{"id": "v2-004", "query": "apt-c-36", "expected": "APT-C-36", "kind": "exact"}
+{"id": "v2-005", "query": "Andariel", "expected": "Andariel", "kind": "exact"}
+{"id": "v2-006", "query": "apt17", "expected": "APT17", "kind": "exact"}
+{"id": "v2-007", "query": "ALLANITE", "expected": "ALLANITE", "kind": "exact"}
+{"id": "v2-008", "query": "Agrius", "expected": "Agrius", "kind": "exact"}
+{"id": "v2-009", "query": "apt30", "expected": "APT30", "kind": "exact"}
+{"id": "v2-010", "query": "Ajax Security Team", "expected": "Ajax Security Team", "kind": "exact"}
+{"id": "v2-011", "query": "Group 74", "expected": "APT28", "kind": "alias"}
+{"id": "v2-012", "query": "GruesomeLarch", "expected": "APT28", "kind": "alias"}
+{"id": "v2-013", "query": "Iron Twilight", "expected": "APT28", "kind": "alias"}
+{"id": "v2-014", "query": "SnakeMackerel", "expected": "APT28", "kind": "alias"}
+{"id": "v2-015", "query": "Swallowtail", "expected": "APT28", "kind": "alias"}
+{"id": "v2-016", "query": "TG-4127", "expected": "APT28", "kind": "alias"}
+{"id": "v2-017", "query": "Blue Kitsune", "expected": "APT29", "kind": "alias"}
+{"id": "v2-018", "query": "CozyDuke", "expected": "APT29", "kind": "alias"}
+{"id": "v2-019", "query": "Iron Hemlock", "expected": "APT29", "kind": "alias"}
+{"id": "v2-020", "query": "NobleBaron", "expected": "APT29", "kind": "alias"}
+{"id": "v2-021", "query": "SolarStorm", "expected": "APT29", "kind": "alias"}
+{"id": "v2-022", "query": "UNC3524", "expected": "APT29", "kind": "alias"}
+{"id": "v2-023", "query": "TG-0110", "expected": "APT3", "kind": "alias"}
+{"id": "v2-024", "query": "C0d0so0", "expected": "APT19", "kind": "alias"}
+{"id": "v2-025", "query": "Codoso Team", "expected": "APT19", "kind": "alias"}
+{"id": "v2-026", "query": "Grey Karkadann", "expected": "APT-C-23", "kind": "alias"}
+{"id": "v2-027", "query": "Two-tailed Scorpion", "expected": "APT-C-23", "kind": "alias"}
+{"id": "v2-028", "query": "Blind Eagle", "expected": "APT-C-36", "kind": "alias"}
+{"id": "v2-029", "query": "TAG-144", "expected": "APT-C-36", "kind": "alias"}
+{"id": "v2-030", "query": "Labyrinth Chollima", "expected": "Lazarus Group", "kind": "alias"}
+{"id": "v2-031", "query": "new APT19 report", "expected": "APT19", "kind": "substring_trap"}
+{"id": "v2-032", "query": "APT17 infrastructure", "expected": "APT17", "kind": "substring_trap"}
+{"id": "v2-033", "query": "indicators: APT-C-23", "expected": "APT-C-23", "kind": "substring_trap"}
+{"id": "v2-034", "query": "Agrius wiper", "expected": "Agrius", "kind": "substring_trap"}
+{"id": "v2-035", "query": "FIN7 Carbanak", "expected": "FIN7", "kind": "substring_trap"}
+{"id": "v2-036", "query": "ALLANITE in the energy sector", "expected": "ALLANITE", "kind": "substring_trap"}
+{"id": "v2-037", "query": "Akira leak site", "expected": "Akira", "kind": "substring_trap"}
+{"id": "v2-038", "query": "Andariel ransomware", "expected": "Andariel", "kind": "substring_trap"}
+{"id": "v2-039", "query": "APT12 timeline", "expected": "APT12", "kind": "substring_trap"}
+{"id": "v2-040", "query": "Cobalt Group ATM attacks", "expected": "Cobalt Group", "kind": "substring_trap"}
+{"id": "v2-041", "query": "APT 12", "expected": "APT12", "kind": "typo_or_variant"}
+{"id": "v2-042", "query": "APT-16", "expected": "APT16", "kind": "typo_or_variant"}
+{"id": "v2-043", "query": "apt_17", "expected": "APT17", "kind": "typo_or_variant"}
+{"id": "v2-044", "query": "APT 18", "expected": "APT18", "kind": "typo_or_variant"}
+{"id": "v2-045", "query": "Fin7.", "expected": "FIN7", "kind": "typo_or_variant"}
+{"id": "v2-046", "query": "Lazarus  Group", "expected": "Lazarus Group", "kind": "typo_or_variant"}
+{"id": "v2-047", "query": "Ocean-Lotus", "expected": "APT32", "kind": "typo_or_variant"}
+{"id": "v2-048", "query": "Gold_Niagara", "expected": "FIN7", "kind": "typo_or_variant"}
+{"id": "v2-049", "query": "Pawn-Storm", "expected": "APT28", "kind": "typo_or_variant"}
+{"id": "v2-050", "query": "Threat-Group-0416", "expected": "APT18", "kind": "typo_or_variant"}
+{"id": "v2-051", "query": "Lazarous Group", "expected": "Lazarus Group", "kind": "typo_or_variant"}
+{"id": "v2-052", "query": "Andriel", "expected": "Andariel", "kind": "typo_or_variant"}
+{"id": "v2-053", "query": "Agrious", "expected": "Agrius", "kind": "typo_or_variant"}
+{"id": "v2-054", "query": "Allanit", "expected": "ALLANITE", "kind": "typo_or_variant"}
+{"id": "v2-055", "query": "Cobolt Group", "expected": "Cobalt Group", "kind": "typo_or_variant"}
+{"id": "v2-056", "query": "Aoqin Dragn", "expected": "Aoqin Dragon", "kind": "typo_or_variant"}
+{"id": "v2-057", "query": "Sofacey", "expected": "APT28", "kind": "typo_or_variant"}
+{"id": "v2-058", "query": "Nobellium", "expected": "APT29", "kind": "typo_or_variant"}
+{"id": "v2-059", "query": "Akirra", "expected": "Akira", "kind": "typo_or_variant"}
+{"id": "v2-060", "query": "APT 3O", "expected": "APT30", "kind": "typo_or_variant"}
+{"id": "v2-061", "query": "APT42", "expected": null, "kind": "out_of_scope"}
+{"id": "v2-062", "query": "APT43", "expected": null, "kind": "out_of_scope"}
+{"id": "v2-063", "query": "APT9", "expected": null, "kind": "out_of_scope"}
+{"id": "v2-064", "query": "APT4", "expected": null, "kind": "out_of_scope"}
+{"id": "v2-065", "query": "APT20", "expected": null, "kind": "out_of_scope"}
+{"id": "v2-066", "query": "FIN5", "expected": null, "kind": "out_of_scope"}
+{"id": "v2-067", "query": "FIN9", "expected": null, "kind": "out_of_scope"}
+{"id": "v2-068", "query": "FIN13", "expected": null, "kind": "out_of_scope"}
+{"id": "v2-069", "query": "Silence", "expected": null, "kind": "out_of_scope"}
+{"id": "v2-070", "query": "Evil Corp", "expected": null, "kind": "out_of_scope"}
+{"id": "v2-071", "query": "TA505", "expected": null, "kind": "out_of_scope"}
+{"id": "v2-072", "query": "Winnti Group", "expected": null, "kind": "out_of_scope"}
+{"id": "v2-073", "query": "BlackEnergy", "expected": null, "kind": "out_of_scope"}
+{"id": "v2-074", "query": "Black Basta", "expected": null, "kind": "out_of_scope"}
+{"id": "v2-075", "query": "Royal", "expected": null, "kind": "out_of_scope"}
+{"id": "v2-076", "query": "Hive", "expected": null, "kind": "out_of_scope"}
+{"id": "v2-077", "query": "Ryuk", "expected": null, "kind": "out_of_scope"}
+{"id": "v2-078", "query": "QakBot", "expected": null, "kind": "out_of_scope"}
+{"id": "v2-079", "query": "PlugX", "expected": null, "kind": "out_of_scope"}
+{"id": "v2-080", "query": "ShadowPad", "expected": null, "kind": "out_of_scope"}
+{"id": "v2-081", "query": "Metasploit", "expected": null, "kind": "out_of_scope"}
+{"id": "v2-082", "query": "Nmap", "expected": null, "kind": "out_of_scope"}
+{"id": "v2-083", "query": "Splunk", "expected": null, "kind": "out_of_scope"}
+{"id": "v2-084", "query": "Amazon", "expected": null, "kind": "out_of_scope"}
+{"id": "v2-085", "query": "phishing kit", "expected": null, "kind": "out_of_scope"}
+{"id": "v2-086", "query": "zero-day", "expected": null, "kind": "out_of_scope"}
+{"id": "v2-087", "query": "botnet", "expected": null, "kind": "out_of_scope"}
+{"id": "v2-088", "query": "insider threat", "expected": null, "kind": "out_of_scope"}
+{"id": "v2-089", "query": "cyber crime gang", "expected": null, "kind": "out_of_scope"}
+{"id": "v2-090", "query": "threat actor list", "expected": null, "kind": "out_of_scope"}
+{"id": "v2-091", "query": "APT", "expected": null, "kind": "out_of_scope"}
+{"id": "v2-092", "query": "FIN", "expected": null, "kind": "out_of_scope"}
+{"id": "v2-093", "query": "hackers from Russia", "expected": null, "kind": "out_of_scope"}
+{"id": "v2-094", "query": "zxcvbnm", "expected": null, "kind": "out_of_scope"}
+{"id": "v2-095", "query": "test", "expected": null, "kind": "out_of_scope"}
+{"id": "v2-096", "query": "???", "expected": null, "kind": "out_of_scope"}
+{"id": "v2-097", "query": "lorem ipsum", "expected": null, "kind": "out_of_scope"}
+{"id": "v2-098", "query": "pizza near me", "expected": null, "kind": "out_of_scope"}
+{"id": "v2-099", "query": "stock price of NVDA", "expected": null, "kind": "out_of_scope"}
+{"id": "v2-100", "query": "Cobalt blue paint", "expected": null, "kind": "out_of_scope"}
